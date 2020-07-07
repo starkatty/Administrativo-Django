@@ -1,0 +1,99 @@
+{% extends 'blog/welcome.html' %} 
+{% block content %}           
+<!--NAVIGATION 2 INICIO-->
+<div class="container">
+    <nav aria-label="breadcrumb fixed-top">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/UsuarioRegistrado">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="#">Autenticación y Autorización</a></li>
+        <li class="breadcrumb-item"><a href="#">Usuario</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Añadir Usuarios</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NAVIGATION 2 FIN-->
+
+  <!--AÑADIR USUARIO-->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h5 class="ml-3">Añadir Usuario</h5>
+              <form class="form" method="POST" action="">
+
+                <p class="ml-3">Primero introduzca un nombre de usuario y una contraseña. Luego podrá editar el resto de opciones del usuario.</p>
+
+                <!--NOMBRE DE USUARIO-->
+                <div class="container mt-5 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold" for="">Nombre de usuario:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control d-inline w-50" id="nombre" placeholder="Nombre">
+                    <p class="text-muted textsize mt-2">Requerido. 150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</p>
+                    </div>
+                </div> 
+                <hr>
+
+                <!--CONTRASEÑA-->
+                <div class="container mt-3 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold d-inline" for="">Contraseña:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control d-inline w-25" id="contrasena" placeholder="Contraseña">
+                        <p class="text-muted textsize mt-2">Su contraseña no puede asemejarse tanto a su otra información personal.</p>
+                        <p class="text-muted textsize">Su contraseña debe contener al menos 8 caracteres.</p>
+                        <p class="text-muted textsize">Su contraseña no puede ser una clave utilizada comunmente.</p>
+                        <p class="text-muted textsize">Su contraseña no puede ser completamente numérica.</p>
+                    </div>
+                </div>
+                <hr>
+
+                <!--CONTRASEÑA (CONFIRMACIÓN)-->
+                <div class="container mt-3 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold d-inline" for="">Contraseña (Confirmación):</label>
+                    </div>
+                  <div class="col-md-9">
+                    <input type="password" class="form-control d-inline w-25" id="contrasenaconfirmacion" placeholder="Contraseña">
+                    <p class="text-muted textsize mt-2">Para verificar, introduzca la misma contraseña anterior.</p>
+                  </div>
+                </div>
+                <hr>
+
+                <!--BOTONES-->
+                <div class="container mt-3 d-flex justify-content-end bg-light">
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y añadir otro</button>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y continuar editando</button>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">GRABAR</button>
+                    </div>  
+                </div>
+                <hr>
+              </form>
+          </div>
+      </div>
+  </div>
+  
+
+{% endblock %}
+
+
+<!--
+<h2>Registrar usuario</h2>
+
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Registrar</button>
+</form>
+
+<hr />
+
+<a href="/login">Iniciar sesión</a>
+-->

@@ -1,0 +1,94 @@
+{% extends 'blog/welcome.html' %} 
+{% block content %} 
+
+  <!--NAVIGATION 2 INICIO-->
+  <div class="container">
+    <nav aria-label="breadcrumb fixed-top">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="#">Autenticación y Autorización</a></li>
+        <li class="breadcrumb-item"><a href="#">Grupos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Añadir Grupos</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NAVIGATION 2 FIN-->
+
+  <!--AÑADIR EL POST-->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h5 class="ml-3">Añadir Grupo</h5>
+              <form action="">
+
+                <!--NOMBRE-->
+                <div class="container mt-5">
+                    <label class="mr-3 font-weight-bold" for="">Nombre:</label>
+                    <input type="text" class="form-control d-inline w-50" id="nombre" placeholder="Nombre">
+                </div> 
+                <hr>
+                <!--PERMISOS-->
+                <div class="container mt-3">
+                    <label class="mr-3 font-weight-bold" for="">Permisos:</label>
+                    <div class="container d-flex d-inline">
+                        <fieldset>
+                            <div class="form-row field-permissions">
+                                <div class="related-widget-wrapper">
+                                    <select name="permissions" id="id_permissions" multiple class="selectfilter d-inline" data-field-name="permisos" data-is-stacked="0">
+                                        <option value="1">admin | entrada de registro | Can add log entry</option>
+                                        <option value="2">admin | entrada de registro | Can change log entry</option>
+                                        <option value="3">admin | entrada de registro | Can delete log entry</option>
+                                        <option value="4">admin | entrada de registro | Can view log entry</option>
+                                        <option value="9">auth | grupo | Can add group</option>
+                                        <option value="10">auth | grupo | Can change group</option>
+                                        <option value="11">auth | grupo | Can delete group</option>
+                                        <option value="12">auth | grupo | Can view group</option>
+                                        <option value="5">auth | permiso | Can add permission</option>
+                                        <option value="6">auth | permiso | Can change permission</option>
+                                        <option value="7">auth | permiso | Can delete permission</option>
+                                        <option value="8">auth | permiso | Can view permission</option>
+                                        <option value="13">auth | usuario | Can add user</option>
+                                        <option value="14">auth | usuario | Can change user</option>
+                                        <option value="15">auth | usuario | Can delete user</option>
+                                        <option value="16">auth | usuario | Can view user</option>
+                                        <option value="25">blog | post | Can add post</option>
+                                        <option value="26">blog | post | Can change post</option>
+                                        <option value="27">blog | post | Can delete post</option>
+                                        <option value="28">blog | post | Can view post</option>
+                                        <option value="17">contenttypes | tipo de contenido | Can add content type</option>
+                                        <option value="18">contenttypes | tipo de contenido | Can change content type</option>
+                                        <option value="19">contenttypes | tipo de contenido | Can delete content type</option>
+                                        <option value="20">contenttypes | tipo de contenido | Can view content type</option>
+                                        <option value="21">sessions | sesión | Can add session</option>
+                                        <option value="22">sessions | sesión | Can change session</option>
+                                        <option value="23">sessions | sesión | Can delete session</option>
+                                        <option value="24">sessions | sesión | Can view session</option>
+                                    </select>  
+                                </div>
+                            </div>
+                                <div class="textsize">Mantenga presionado "Control", o "Command" en un Mac, para seleccionar más de una opción.</div>
+                        </fieldset>
+                    </div>
+                </div>
+                <hr>
+
+                <!--BOTONES-->
+                <div class="container mt-3 d-flex justify-content-end bg-light">
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto">Grabar y añadir otro</button>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto">Grabar y continuar editando</button>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto">GRABAR</button>
+                    </div>  
+                </div>
+                <hr>
+              </form>
+          </div>
+      </div>
+  </div>
+
+{% endblock %}

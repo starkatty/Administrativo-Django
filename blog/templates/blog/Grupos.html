@@ -1,0 +1,34 @@
+{% extends 'blog/welcome.html' %} 
+{% block content %}
+
+<!--NAVIGATION 2 INICIO-->
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="#">Autenticación y Autorización</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Grupos</li>
+    </ol>
+  </nav>
+</div>
+<!--NAVIGATION 2 FIN-->
+
+<!--GRUPOS-->
+<div class="container w-100 h-100">
+  <form>
+    <div class="container d-flex">
+      <h5 for="">Escoja grupo a modificar</h5>
+      <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Grupo  <i class="fas fa-plus"></i></button>
+    </div>
+    <div class="container d-flex align-items-left mt-3 w-50 ml-0">
+        <i class="fas fa-search mt-2 mr-2"></i>
+        <input type="text" class="form-control mr-2" id="BuscarGrupo" placeholder="Grupo">
+        <button class="btn btn-primary btn-wd btn-sm ml-auto">Buscar</button>
+    </div>  
+  </form>
+  <hr>
+  <h6 class="ml-3">0 grupos</h6>
+  <hr>
+</div>
+
+{% endblock %}

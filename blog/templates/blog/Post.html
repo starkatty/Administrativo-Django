@@ -1,0 +1,137 @@
+{% extends 'blog/welcome.html' %} 
+{% block content %}
+
+  <!--NAVIGATION 2 INICIO-->
+  <div class="container">
+    <nav aria-label="breadcrumb fixed-top">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="#">Blog</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Post</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NAVIGATION 2 FIN-->
+
+   <!--POSTS-->
+    <div class="container w-100 h-100">
+        <div class="container d-flex">
+            <h5 for="">Escoja post a modificar</h5>
+            <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Post  <i class="fas fa-plus"></i></button>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!--ACCIONES DE USUARIOS-->
+
+                    <div class="container mt-3">
+                        <label class="mr-2" for="">Acción:</label>
+                        <select class="mr-1" name="action" required>
+                        <option value="" selected>---------</option>
+                        <option value="delete_selected">Eliminar usuarios seleccionado/s</option>
+                        </select>
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto">Ir</button>
+                        <label for="">Seleccionados 0 de 1</label>
+                    </div>
+                    
+                    <!--TABLA DE USUARIOS-->
+                    
+                    <!-- Light table -->
+                    <div class="container mt-4">
+      
+                    <div class="table-responsive">
+                        <table class="table justify-content-center align-items-center table-flush">
+                        <thead class="bg-light">
+                            <tr>
+                            <th scope="col" data-sort="usuario">
+                                <div class="form-check justify-content-center">
+                                    <label class="form-check-label">
+                                    <input class="form-check-input my-auto" type="checkbox" value="">
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th scope="col" data-sort="post">POST</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <tr>
+                            <th scope="row">
+                                <div class="form-check justify-content-center align-items-center">
+                                    <label class="form-check-label">
+                                    <input class="form-check-input my-auto" type="checkbox" value="">
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                    </label>
+                                </div>
+                            </th>
+                            <td class="budget">
+                               <a class="font-weight-bold" href="#">Sample title</a> 
+                            </td>
+                            
+                            </tr>
+                            <!--FILA 2-->
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check justify-content-center py-1">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input my-auto" type="checkbox" value="">
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <td class="budget">
+                                    <a class="font-weight-bold" href="">Modelos en Django</a> 
+                                </td>
+                                
+                            </tr>
+
+                            <!--FILA 3-->
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check justify-content-center py-1">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input my-auto" type="checkbox" value="">
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <td class="budget">
+                                    <a class="font-weight-bold" href="">¿Por qué necesitas un framework?</a>
+                                </td>
+                            </tr>
+
+                            <!--FILA 4-->
+                            <tr>
+                                <th scope="row">
+                                   
+                                </th>
+                                <td class="budget">
+                                    
+                                </td>
+                            </tr>
+
+                        </tbody>
+                        </table>
+                    </div> 
+                    </div>
+                                    <div class="container">
+                                        <hr>
+                                        <h6 class="ml-3">0 Posts</h6>
+                                        <hr>
+                                    </div>   
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

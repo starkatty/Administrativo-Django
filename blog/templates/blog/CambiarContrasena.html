@@ -1,0 +1,75 @@
+{% extends 'blog/welcome.html' %} 
+{% block content %}
+
+  <!--NAVIGATION 2 INICIO-->
+  <div class="container">
+    <nav aria-label="breadcrumb fixed-top">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/UsuarioRegistrado">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Cambio de Contraseña</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NAVIGATION 2 FIN-->
+
+  <!--AÑADIR USUARIO-->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h5 class="ml-3">Cambio de Contraseña</h5>
+              <form action="">
+
+                <p class="ml-3">Por favor, introduzca su contraseña antigua, por seguridad, y después introduzca la nueva contraseña dos veces para verificar que la ha escrito correctamente.</p>
+
+                <!--CONTRASEÑA ANTIGUA-->
+                <div class="container mt-5 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold" for="">Contraseña antigua:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control d-inline w-50" id="nombre" placeholder="Nombre">
+                    </div>
+                </div> 
+                <hr>
+
+                <!--CONTRASEÑA-->
+                <div class="container mt-3 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold d-inline" for="">Contraseña nueva:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control d-inline w-25" id="contrasena" placeholder="Contraseña">
+                        <p class="text-muted textsize mt-2">Su contraseña no puede asemejarse tanto a su otra información personal.</p>
+                        <p class="text-muted textsize">Su contraseña debe contener al menos 8 caracteres.</p>
+                        <p class="text-muted textsize">Su contraseña no puede ser una clave utilizada comunmente.</p>
+                        <p class="text-muted textsize">Su contraseña no puede ser completamente numérica.</p>
+                    </div>
+                </div>
+                <hr>
+
+                <!--CONTRASEÑA (CONFIRMACIÓN)-->
+                <div class="container mt-3 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold d-flex d-inline" for="">Contraseña nueva (Confirmación):</label>
+                    </div>
+                  <div class="col-md-9">
+                    <input type="password" class="form-control d-inline w-25" id="contrasenaconfirmacion" placeholder="Contraseña">
+                    <p class="text-muted textsize mt-2">Para verificar, introduzca la misma contraseña anterior.</p>
+                  </div>
+                </div>
+                <hr>
+
+                <!--BOTONES-->
+                <div class="container mt-3 d-flex justify-content-end bg-light">
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto">CAMBIAR MI CONTRASEÑA</button>
+                    </div> 
+                </div>
+                <hr>
+              </form>
+          </div>
+      </div>
+  </div>
+
+{% endblock %}
