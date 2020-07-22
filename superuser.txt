@@ -1,0 +1,10 @@
+estrellakatty
+katiuskasalazar16@gmail.com
+Estrella.#2020
+
+requirements
+Django==2.2.13
+django-widget-tweaks==1.4.8
+psycopg2==2.8.5
+pytz==2020.1
+sqlparse==0.3.1

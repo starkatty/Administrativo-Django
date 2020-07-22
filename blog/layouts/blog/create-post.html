@@ -1,11 +1,12 @@
 {% extends 'blog/welcome.html' %} 
+{% load widget_tweaks %}
 {% block content %} 
 
   <!--NAVIGATION 2 INICIO-->
   <div class="container">
     <nav aria-label="breadcrumb fixed-top">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/UsuarioRegistrado">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="userregister">Inicio</a></li>
         <li class="breadcrumb-item"><a href="#">Blog</a></li>
         <li class="breadcrumb-item"><a href="#">Post</a></li>
         <li class="breadcrumb-item active" aria-current="page">Añadir Post</li>
@@ -20,7 +21,8 @@
       <div class="row">
           <div class="col-md-12">
               <h5 class="ml-3">Añadir Post</h5>
-              <form action="">
+              <form class="form" method="POST" action="crear">
+                {% csrf_token %}
                 
                 <!--AUTOR-->
                 <div class="container mt-5">
@@ -36,7 +38,7 @@
                 <!--TITULO-->
                 <div class="container mt-3">
                     <label class="mr-3 font-weight-bold" for="">Title:</label>
-                    <input type="text" class="form-control d-inline w-50" id="titulo" placeholder="titulo">
+                    <input type="text" class="form-control d-inline w-50" id="titulo" name="titulo" placeholder="titulo">
                 </div> 
                 <hr>
                 <!--TEXTO-->
@@ -72,7 +74,7 @@
                     <div class="row d-flex d-inline">
                         <label class="mr-3 font-weight-bold" for="">Published date:</label>
                         <p class="datetime">
-                        Fecha: <input type="text" name="created_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> 
+                        Fecha: <input type="text" name="published_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> 
                         <a class="mr-2" href="">Hoy</a>
                         <p class="mr-2">|</p>
                         <i class="fas fa-calendar-alt mr-2"></i>
@@ -81,7 +83,7 @@
                     </div> 
                     <div class="row d-flex d-inline">
                         <p class="datetime">
-                        Hora: <input type="text" name="created_date_1" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">    
+                        Hora: <input type="text" name="published_date_1" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">    
                         <a class="mr-2" href="">Ahora</a>
                         <p class="mr-2">|</p>
                         <i class="fas fa-clock mr-2"></i>

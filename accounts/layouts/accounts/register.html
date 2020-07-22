@@ -19,8 +19,8 @@
       <div class="row">
           <div class="col-md-12">
               <h5 class="ml-3">Añadir Usuario</h5>
-              <form class="form" method="POST" action="">
-
+              <form class="form" method="POST" action="registeruser">
+                {% csrf_token %}
                 <p class="ml-3">Primero introduzca un nombre de usuario y una contraseña. Luego podrá editar el resto de opciones del usuario.</p>
 
                 <!--NOMBRE DE USUARIO-->
@@ -29,7 +29,7 @@
                         <label class="mr-3 font-weight-bold" for="">Nombre de usuario:</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control d-inline w-50" id="nombre" placeholder="Nombre">
+                        <input type="text" class="form-control d-inline w-50" id="nombre" name="nombre" placeholder="Nombre">
                     <p class="text-muted textsize mt-2">Requerido. 150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</p>
                     </div>
                 </div> 
@@ -41,7 +41,7 @@
                         <label class="mr-3 font-weight-bold d-inline" for="">Contraseña:</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="password" class="form-control d-inline w-25" id="contrasena" placeholder="Contraseña">
+                        <input type="password" class="form-control d-inline w-25" id="contrasena" name="contrasena" placeholder="Contraseña">
                         <p class="text-muted textsize mt-2">Su contraseña no puede asemejarse tanto a su otra información personal.</p>
                         <p class="text-muted textsize">Su contraseña debe contener al menos 8 caracteres.</p>
                         <p class="text-muted textsize">Su contraseña no puede ser una clave utilizada comunmente.</p>
@@ -56,7 +56,7 @@
                         <label class="mr-3 font-weight-bold d-inline" for="">Contraseña (Confirmación):</label>
                     </div>
                   <div class="col-md-9">
-                    <input type="password" class="form-control d-inline w-25" id="contrasenaconfirmacion" placeholder="Contraseña">
+                    <input type="password" class="form-control d-inline w-25" id="contrasenaconfirmacion" name="contrasenaconfirmacion" placeholder="Contraseña">
                     <p class="text-muted textsize mt-2">Para verificar, introduzca la misma contraseña anterior.</p>
                   </div>
                 </div>
