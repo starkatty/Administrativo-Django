@@ -1,26 +1,26 @@
-{% extends 'blog/welcome.html' %} 
+{% extends 'welcome.html' %} 
 {% load widget_tweaks %}
 {% block content %} 
 
-  <!--NAVIGATION 2 INICIO-->
+  <!--NAVEGACIÓN-->
   <div class="container">
     <nav aria-label="breadcrumb fixed-top">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="userregister">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="#">Blog</a></li>
-        <li class="breadcrumb-item"><a href="#">Post</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Añadir Post</li>
+        <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'postadmin' %}">Blog</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'listpost' %}">Post</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% block tag %} Añadir Post {% endblock tag %}</li>
       </ol>
     </nav>
   </div>
-  <!--NAVIGATION 2 FIN-->
+  <!--NAVEGACIÓN-->
 
   <!--AÑADIR EL POST-->
 
   <div class="container">
       <div class="row">
           <div class="col-md-12">
-              <h5 class="ml-3">Añadir Post</h5>
+              <h5 class="ml-3">{% block titule %} Añadir Post {% endblock titule %}</h5>
               <form class="form" method="POST" action="crear">
                 {% csrf_token %}
                 
@@ -28,27 +28,30 @@
                 <div class="container mt-5">
                     <label class="mr-3 font-weight-bold" for="">Author:</label>
                     <select class="mr-1" name="action" required>
-                    <option value="" selected>---------</option>
-                    <option value="delete_selected">katiuskasalazar</option>
+                    <form class="form" method="POST" action="UserList">
+                        {% for user in objetc_list %}
+                        <option value="delete_selected">{{ user.username }}</option>
+                        {% endfor %}
+                    </form>
                     </select>
                     <i class="fas fa-pencil-alt mr-2"></i>
-                    <i class="fas fa-plus"></i>
+                    <a href="user/create"><i class="fas fa-plus"></i></a>
                 </div>
                 <hr>
                 <!--TITULO-->
                 <div class="container mt-3">
                     <label class="mr-3 font-weight-bold" for="">Title:</label>
-                    <input type="text" class="form-control d-inline w-50" id="titulo" name="titulo" placeholder="titulo">
+                    <input type="text" class="form-control d-inline w-50" id="titulo" name="titulo" placeholder="titulo" value="{{ post.title }}">
                 </div> 
                 <hr>
                 <!--TEXTO-->
                 <div class="container mt-3">
                     <label class="mr-3 font-weight-bold" for="">Text:</label>
-                    <textarea class="d-inline" name="texto" id="textopost" cols="100" rows="10"></textarea>
+                    <textarea class="d-inline" name="texto" id="textopost" cols="100" rows="10">{{ post.text }}</textarea>
                 </div>
                 <hr>
                 <!--FECHA DE CREACION-->
-                <div class="container mt-3 dflex d-block d-inline">
+                <div class="container mt-3 d-block d-inline">
                     <div class="row d-flex d-inline">
                         <label class="mr-3 font-weight-bold" for="">Created date:</label>
                         <p class="datetime">
@@ -70,7 +73,7 @@
                 </div>
                 <hr>
                 <!--FECHA DE PUBLICACION-->
-                <div class="container mt-3 dflex d-block d-inline">
+                <div class="container mt-3 d-block d-inline">
                     <div class="row d-flex d-inline">
                         <label class="mr-3 font-weight-bold" for="">Published date:</label>
                         <p class="datetime">
@@ -93,6 +96,9 @@
                 <hr>
                 <!--BOTONES-->
                 <div class="container mt-3 d-flex justify-content-end bg-light">
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto">ELIMINAR</button>
+                    </div> 
                     <div class="p-2">
                         <button class="btn btn-primary btn-wd btn-sm ml-auto">Grabar y añadir otro</button>
                     </div>

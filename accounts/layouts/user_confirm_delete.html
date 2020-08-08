@@ -1,0 +1,37 @@
+{% extends 'welcome.html' %} 
+{% block content %}           
+<!--NAVEGACIÓN-->
+<div class="container">
+    <nav aria-label="breadcrumb fixed-top">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Eliminar Usuario</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NNAVEGACIÓN-->
+
+  <!--AÑADIR USUARIO-->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h5 class="ml-3">Eliminar Usuario</h5>
+              <form class="form" method="POST" action="">
+                {% csrf_token %}
+                <p class="ml-3">¿Confirma eliminar el usuario {{ object }}?</p>
+                <!--BOTONES-->
+                <div class="container mt-3 d-flex justify-content-end bg-light">
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">CONFIRMAR</button>
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">CANCELAR</button>
+                    </div>  
+                </div>
+                <hr>
+              </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}

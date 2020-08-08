@@ -18,7 +18,7 @@
 
 <body>
 
-    <!--NAVIGATION-->
+    <!--NAVEGACIÓN PRINCIPAL-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="">
@@ -33,10 +33,10 @@
                   <a class="nav-link">BIENVENDO/A, {{request.user.username}}</a>
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="#">VER EL SITIO /</a>
+                <a class="nav-link" href="{% url 'welcome' %}">VER EL SITIO /</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="cambiarpassword">CAMBIAR CONTRASEÑA /</a>
+                <a class="nav-link" href="{% url 'updateuser' user.pk %}">CAMBIAR CONTRASEÑA /</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/logout">TERMINAR SESIÓN</a>
@@ -45,9 +45,9 @@
             </div>
         </div>
     </nav>
-    
+   
     {% block content %}
-    {% endblock %}
+    {% endblock content %}
 
 <!--Bootstrap Javascript-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

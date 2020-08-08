@@ -1,18 +1,38 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
-class RegistroUserForm (UserCreationForm):
+class RegisterUserForm (UserCreationForm):
     class Meta:
         models=User
         fields=[
             'username',
-            'firtsname',
-            'last_name',
-            'email',
+            'password',
         ]
         labels={
             'username': 'Nombre de Usuario',
-            'firtsname': 'Nombre',
-            'last_name': 'Apellido',
-            'email': 'Correo',
+            'password': 'Contraseña',
+        }
+
+class EditUserForm (UserCreationForm):
+    class Meta:
+        models=User
+        fields= '__all__'
+        labels={
+            'username': 'Nombre de Usuario',
+            'password': 'Contraseña',
+            'first_name': 'Nombre',
+            'last_name': 'Apellidos',
+            'email': 'Dirección de correo electrónico',
+            'is_active': 'Activo',
+            'is_staff': 'Es staff',
+            'is_superuser': 'Es superusuario',  
+        }
+
+class RegisterGroupForm (forms.ModelForm):
+    class Meta:
+        models=Group
+        fields= '__all__'
+        labels={
+            'name': 'Nombre de Grupo',
         }

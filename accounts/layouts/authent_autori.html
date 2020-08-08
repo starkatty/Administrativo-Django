@@ -1,0 +1,28 @@
+{% extends 'users-register.html' %}
+{% block authen_autori %}
+<!--AUTENTICACIÓN Y AUTORIZACIÓN-->
+<form class="form" method="POST" action="">
+  {% csrf_token %}
+    <div class="card-header p-0 card-header-primary text-center text-white">
+      <h6 class="card-title">Autenticación y Autorización</h6>
+    </div>
+    <div class="container">
+          <div class="form-group d-flex mt-3">
+            <label class="font-weight-bold" for="grupos">Grupos</label>
+                  <div class="container d-flex ml-auto justify-content-end">
+                    <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
+                    <a href=""><i class="far fa-edit"></i> Modificar</a>
+                  </div>  
+          </div>
+          <hr>
+          <div class="form-group d-flex justify-content-between">
+            <label class="font-weight-bold" for="Usuarios">Usuarios</label>
+            <div class="container d-flex ml-auto justify-content-end">
+              <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
+              <a href=""><i class="far fa-edit"></i> Modificar</a>
+            </div>  
+          </div>
+          <hr>
+     </div>
+</form>
+{% endblock %}

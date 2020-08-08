@@ -1,0 +1,102 @@
+{% extends 'welcome.html' %} 
+{% block content %}
+
+<!--NAVEGACIÓN-->
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'authent_autori' %}">Autenticación y Autorización</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Grupos</li>
+    </ol>
+  </nav>
+</div>
+<!--NAVEGACIÓN-->
+
+<!--GRUPOS-->
+<div class="container w-100 h-100">
+  <form class="form" method="POST" action="creategroup">
+    {% csrf_token %}
+    <div class="container d-flex">
+      <h5 for="">Escoja grupo a modificar</h5>
+      <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Grupo  <i class="fas fa-plus"></i></button>
+    </div>
+    <div class="container d-flex align-items-left mt-3 w-50 ml-0">
+        <i class="fas fa-search mt-2 mr-2"></i>
+        <input type="text" class="form-control mr-2" id="BuscarGrupo" placeholder="Grupo">
+        <button class="btn btn-primary btn-wd btn-sm ml-auto">Buscar</button>
+    </div>  
+  </form>
+  <hr>
+
+<!--ACCIONES DE GRUPOS-->
+<form class="form" method="POST" action="">
+  {% csrf_token %}
+  <div class="container mt-4">
+    <label class="mr-2" for="">Acción:</label>
+    <select class="mr-1" name="action" required>
+      <option value="" selected>---------</option>
+      <option value="delete_selected">Eliminar grupos seleccionado/s</option>
+    </select>
+    <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Ir</button>
+    <label for="">Seleccionados 0 de 1</label>
+  </div>
+</form>
+
+
+<!--TABLA DE GRUPOS-->
+<div class="container mt-4">
+<div class="table-responsive">
+  <table class="table justify-content-center align-items-center table-flush">
+    <thead class="thead-light bg-light">
+      <tr>
+        <th scope="col" data-sort="seleccion">
+          <div class="form-check justify-content-center">
+            <label class="form-check-label">
+            <input class="form-check-input my-auto" type="checkbox" value="" name="seleccion">
+            <span class="form-check-sign">
+                <span class="check"></span>
+            </span>
+            </label>
+          </div>
+        </th>
+        <th scope="col" data-sort="usuario">GRUPO</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody class="list">
+      {% for group in object_list %}
+      <tr>
+        <th scope="row">
+          <div class="form-check justify-content-center">
+            <label class="form-check-label">
+            <input class="form-check-input my-auto" type="checkbox" value="">
+            <span class="form-check-sign">
+                <span class="check"></span>
+            </span>
+            </label>
+          </div>
+        </th>
+        <th scope="row">
+          <div class="media align-items-center">
+            <div class="media-body">
+              <a class="name mb-0 text-sm" href="{% url 'groupdetail' group.pk %}">{{ group.name }}</a>
+            </div>
+          </div>
+        </th>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tr></tr>
+  </table>
+</div>
+</div>
+                <div class="container">
+                  <hr>
+                  <h6 class="ml-3">{{ object_list }} grupos</h6>
+                  <hr>
+                </div>   
+</div>
+</div>
+{% endblock %}

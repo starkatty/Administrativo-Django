@@ -1,0 +1,294 @@
+{% extends 'welcome.html' %} 
+{% block content %}
+
+  <!--NAVEGACIÓN-->
+  <div class="container">
+    <nav aria-label="breadcrumb fixed-top">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'authent_autori' %}">Autenticación y Autorización</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'listuser' %}">Usuarios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ user.username }}</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NAVEGACIÓN-->
+
+  <!--MODIFICAR USUARIO-->
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h5 class="ml-3">Modificar Usuario</h5>
+            <form class="form" method="POST" action="">
+              {% csrf_token %}
+              <!--NOMBRE DE USUARIO-->
+              <div class="container mt-5 d-flex d-block">
+                  <div class="col-md-3">
+                      <label class="mr-3 font-weight-bold d-inline" for="">Nombre de Usuario</label>  
+                  </div>
+                  <div class="col-md-9">
+                      {{ form.username }}
+                      <!--<input type="text" class="form-control d-inline w-25" id="nombre" placeholder="Nombre" value="{{ user.username }}">-->
+                      <p class="text-muted textsize mt-2">Requerido. 150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</p>
+                  </div>
+              </div> 
+              <hr>
+
+              <!--CONTRASEÑA-->
+              <div class="container mt-3 d-flex d-inline">
+                  <div class="col-md-3">
+                      <label class="mr-3 font-weight-bold d-inline" for="">Contraseña</label>
+                  </div>
+                  <div class="col-md-9">
+                      <!--<input type="password" class="form-control d-inline w-25" id="contrasena" placeholder="Contraseña" value="{{ user.password }}>-->
+
+                      <p class="text-muted textsize mt-2">Las contraseñas sin procesar no se almacenan, por lo que no hay forma de ver la contraseña de este usuario, pero puedes cambiar la contraseña usando este formulario</p>
+                      
+                      <p class="text-muted textsize mt-2">Su contraseña no puede asemejarse tanto a su otra información personal.</p>
+                      <p class="text-muted textsize">Su contraseña debe contener al menos 8 caracteres.</p>
+                      <p class="text-muted textsize">Su contraseña no puede ser una clave utilizada comunmente.</p>
+                      <p class="text-muted textsize">Su contraseña no puede ser completamente numérica.</p>
+                  </div>
+              </div>
+              <hr>
+
+              <!--INFORMACIÓN PERSONAL-->
+                <div class="card-header p-0 card-header-primary text-center text-white">
+                  <h6 class="card-title">Información Personal</h6>
+                </div>
+
+                <!--NOMBRES-->
+                <div class="container mt-3 d-flex d-block">
+                  <div class="col-md-3">
+                      <label class="mr-3 font-weight-bold d-inline" for="">Nombres</label>  
+                  </div>
+                  <div class="col-md-9">
+                      {{ form.first_name }}
+                      <!--<input type="text" class="form-control d-inline w-25" id="nombres" placeholder="Nombres" value="{{user.first_name}}">-->
+                  </div>
+                </div> 
+                <hr>
+
+                <!--APELLIDOS-->
+                <div class="container mt-3x d-flex d-block">
+                  <div class="col-md-3">
+                      <label class="mr-3 font-weight-bold d-inline" for="">Apellidos</label>  
+                  </div>
+                  <div class="col-md-9">
+                      {{ form.last_name }}
+                      <!--<input type="text" class="form-control d-inline w-25" id="apellidos" placeholder="Apellidos" value="{{ user.last_name }}">-->
+                  </div>
+                </div> 
+                <hr>
+
+                <!--CORREO ELECTRONICO-->
+                <div class="container mt-3x d-flex d-block">
+                  <div class="col-md-3">
+                      <label class="mr-3 font-weight-bold d-inline" for="">Dirección de Correo</label>  
+                  </div>
+                  <div class="col-md-9">
+                      {{ form.email }}
+                      <!--<input type="text" class="form-control d-inline w-25" id="correo" placeholder="Correo" value="{{ user.email }}">-->
+                  </div>
+                </div> 
+                <hr>
+
+              <!--PERMISOS-->
+                <div class="card-header p-0 card-header-primary text-center text-white">
+                  <h6 class="card-title">PERMISOS</h6>
+                </div>
+
+                <!--ACTIVO-->
+                <div class="container mt-3 d-flex d-block">
+                  <div class="col-md-12">
+                    <div class="form-check justify-content-center">
+                      <label class="form-check-label font-weight-bold">
+                      <input class="form-check-input my-auto" type="checkbox" value="">
+                      <span class="form-check-sign">
+                          <span class="check"></span>
+                      </span>
+                      Activo
+                      </label>
+                      <p class="text-muted textsize">Indica si el usuario debe ser tratado como activo. Desmarque esta opción en lugar de borrar la cuenta.</p>
+                    </div>
+                  </div>
+                </div> 
+                <hr>
+
+                <!--ES STAFF-->
+                <div class="container mt-3 d-flex d-block">
+                  <div class="col-md-12">
+                    <div class="form-check justify-content-center">
+                      <label class="form-check-label font-weight-bold">
+                      <input class="form-check-input my-auto" type="checkbox" value="">
+                      <span class="form-check-sign">
+                          <span class="check"></span>
+                      </span>
+                      Es staff
+                      </label>
+                      <p class="text-muted textsize">Indica si el usuario puede entrar en este sitio de administración.</p>
+                    </div>
+                  </div>
+                </div> 
+                <hr>
+
+                <!--ES SUPERUSUARIO-->
+                <div class="container mt-3 d-flex d-block">
+                  <div class="col-md-12">
+                    <div class="form-check justify-content-center">
+                      <label class="form-check-label font-weight-bold">
+                      <input class="form-check-input my-auto" type="checkbox" value="">
+                      <span class="form-check-sign">
+                          <span class="check"></span>
+                      </span>
+                      Es staff
+                      </label>
+                      <p class="text-muted textsize">Indica que este usuario tiene todos los permisos sin asignárselos explícitamente.</p>
+                    </div>
+                  </div>
+                </div> 
+                <hr>
+
+                <!--GRUPOS-->
+                <div class="container mt-3 d-flex d-block">
+                  <div class="selector" class="col-md-12">
+                    <div class="form-check justify-content-center">
+                      <!--LISTADO DE GRUPOS-->
+                      <div class="container mt-3 d-flex d-block">
+                            <div class="col-md-2">
+                              <label class="font-weight-bold" for="id_groups">GRUPOS:</label>
+                            </div>
+                            <div class="col-md-5">
+                              <div class="selector-available" class="form-row field-groups d-flex d-block">
+                                <h6>Grupos Disponibles 
+                                  <span class="help help-tooltip help-icon" title="Esta es la lista de grupos disponibles. Puede elegir algunos seleccionándolos en la caja inferior y luego haciendo clic en la flecha &quot;Elegir&quot; que hay entre las dos cajas."></span>
+                                </h6>
+                                <p id="id_groups_filter" class="selector-filter">
+                                  <label for="id_groups_input">
+                                      <span class="help-tooltip search-label-icon" title="Escriba en este cuadro para filtrar la lista de grupos disponibles"></span>
+                                  </label> 
+                                  <input type="text" placeholder="Filtro" id="id_groups_input">
+                                </p>
+
+
+
+
+                                <!--GRUPOS DISPONIBLES-->
+                                <div class="related-widget-wrapper">
+                                    <select name="groups" id="id_groups" multiple class="selectfilter" data-field-name="grupos" data-is-stacked="0">
+                                        <option value="1" selected>Grupo 1</option>
+                                        <option value="2">Grupo 2</option>
+                                        <option value="3">Grupo 3</option>
+                                        <option value="4">Grupo 4</option>
+                                        <option value="5" selected>Grupo 5</option>
+                                    </select>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-5">
+                                  <select id="id_groups_to" multiple="multiple" size="0" name="groups" class="filtered" style="height: 267.594px;">
+                                    <option value="1" title="Grupo 1">Grupo 1</option>
+                                    <option value="5" title="Grupo 5">Grupo 5</option>
+                                  </select>
+                                  
+                                  <a class="related-widget-wrapper-link add-related" id="add_id_groups"
+                                    href="/admin/auth/group/add/?_to_field=id&amp;_popup=1"
+                                    title="Añadir otro grupo"><img src="/static/admin/img/icon-addlink.svg" alt="Añadir"></a>
+                            </div> 
+                            </div>
+                            <p class="text-muted textsize">Los grupos a los que pertenece este usuario. Un usuario tendrá todos los permisos asignados a cada uno de sus grupos. Mantenga presionado "Control", o "Command" en un Mac, para seleccionar más de una opción.</p>
+                    </div>
+                  </div>
+                </div> 
+                <hr>
+ 
+                <!--PERMISOS DE USUARIOS-->
+                <div class="container mt-3 d-flex d-block">
+                  <div class="col-md-12">
+                    <div class="form-check justify-content-center">
+                      <label class="form-check-label font-weight-bold">
+                      PERMISOS DE USUARIOS
+                      </label>
+                      <p>Indica que este usuario tiene todos los permisos sin asignárselos explícitamente.</p>
+                    </div>
+                  </div>
+                </div> 
+                <hr>
+            
+                <!--FECHAS IMPORTANTES-->
+                <div class="card-header p-0 card-header-primary text-center text-white">
+                  <h6 class="card-title">Fechas Importantes</h6>
+                </div>
+                
+                <!--ULTIMO INICIO DE SESIÓN-->
+                <div class="container mt-3 d-block d-inline">
+                  <div class="row ml-3 d-flex d-inline">
+                      <label class="mr-3 font-weight-bold" for="">Ultimo inicio de sesión</label>
+                      <p class="datetime">
+                      Fecha: <input type="text" name="created_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> 
+                      <a class="mr-2" href="">Hoy</a>
+                      <p class="mr-2">|</p>
+                      <i class="fas fa-calendar-alt mr-2"></i>
+                      <br>
+                      </p>
+                  </div> 
+                  <div class="row ml-3 d-flex d-inline">
+                      <p class="datetime">
+                      Hora: <input type="text" name="created_date_1" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">    
+                      <a class="mr-2" href="">Ahora</a>
+                      <p class="mr-2">|</p>
+                      <i class="fas fa-clock mr-2"></i>
+                      </p>
+                  </div> 
+              </div>
+              <hr>
+
+              <!--FECHA DE ALTA-->
+              <div class="container mt-3 d-block d-inline">
+                <div class="row ml-3 d-flex d-inline">
+                    <label class="mr-3 font-weight-bold" for="">Fecha de Alta</label>
+                    <p class="datetime">
+                    Fecha: <input type="text" name="published_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> 
+                    <a class="mr-2" href="">Hoy</a>
+                    <p class="mr-2">|</p>
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <br>
+                    </p>
+                </div> 
+                <div class="row ml-3 d-flex d-inline">
+                    <p class="datetime">
+                    Hora: <input type="text" name="published_date_1" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">    
+                    <a class="mr-2" href="">Ahora</a>
+                    <p class="mr-2">|</p>
+                    <i class="fas fa-clock mr-2"></i>
+                    </p>
+                </div> 
+            </div>
+            <hr>
+
+          </div>
+
+          <!--BOTONES-->
+          <div class="container mt-3 d-flex justify-content-end bg-light">
+            <div class="p-2">
+                <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">ELIMINAR</button>
+            </div> 
+            <div class="p-2">
+                <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y añadir otro</button>
+            </div>
+            <div class="p-2">
+                <button class="btn btn-primary btn-wd btn-sm ml-auto"type="submit">Grabar y continuar editando</button>
+            </div>
+            <div class="p-2">
+                <button class="btn btn-primary btn-wd btn-sm ml-auto"type="submit">GRABAR</button>
+            </div>  
+          </div>
+          <hr>
+
+        </form>
+        </div>
+    </div>
+</div>
+  
+{% endblock content %}

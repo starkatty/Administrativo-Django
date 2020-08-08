@@ -1,0 +1,22 @@
+{% extends 'users-register.html' %}
+{% block blog %} 
+ <!--ADMINISTRACIÓN DE BLOGS-->
+ <form class="form" method="" action="">
+    <div class="card-header p-0 card-header-primary text-center text-white">
+      <h6 class="card-title">Blog</h6>
+    </div>
+
+   <div class="container">
+    <form>
+      <div class="form-group d-flex justify-content-between mt-3">
+        <label class="font-weight-bold" for="posts">Posts</label>
+        <div class="container d-flex ml-auto justify-content-end">
+          <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
+          <a href=""><i class="far fa-edit"></i> Modificar</a>
+        </div>  
+      </div>
+      <hr>
+    </form>
+   </div>
+  </form>
+{% endblock %}

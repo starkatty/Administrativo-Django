@@ -1,0 +1,188 @@
+{% extends 'welcome.html' %} 
+{% block content %}
+
+  <!--NAVEGACIÓN-->
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'authent_autori' %}">Autenticación y Autorización</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+      </ol>
+    </nav>
+  </div>
+  <!--NAVEGACIÓN-->
+  
+<!--USUARIOS-->
+<div class="container w-100 h-100">
+      <div class="container d-flex justify-content-between">
+        <h5 for="">Escoja usuario a modificar</h5>
+        <!--LLAMAR A LA VISTA createuser AL PRESIONAR EL BOTON-->
+        <form class="form" method="POST" action="create">
+          {% csrf_token %}
+          <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Usuario  <i class="fas fa-plus"></i></button>
+        </form>
+      </div>
+      <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-9">
+                <form class="bg-light" class="form" method="POST" action="{% url 'userdetail' user.pk %}">
+                  {% csrf_token %}
+                  <div class="container d-flex align-items-left mt-3 w-50 ml-0">
+                      <i class="fas fa-search mt-2 mr-2"></i>
+                      <!--{{ form.username }}-->
+                      <input type="text" class="form-control mr-2" id="BuscarUsuario" placeholder="Usuario" value="{{ form.username }}">
+                      <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Buscar</button>
+                  </div> 
+                </form>
+
+
+<!--ACCIONES DE USUARIOS-->
+<form class="form" method="POST" action="">
+  {% csrf_token %}
+  <div class="container mt-4">
+    <label class="mr-2" for="">Acción:</label>
+    <select class="mr-1" name="action" required>
+      <option value="" selected>---------</option>
+      <option value="delete_selected">Eliminar usuarios seleccionado/s</option>
+    </select>
+    <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Ir</button>
+    <label for="">Seleccionados 0 de {{ object_list.count }}</label>
+  </div>
+</form>
+
+
+<!--TABLA DE USUARIOS-->
+<div class="container mt-4">
+<div class="table-responsive">
+  <table class="table justify-content-center align-items-center table-flush">
+    <thead class="thead-light bg-light">
+      <tr>
+        <th scope="col" data-sort="seleccion">
+          <div class="form-check justify-content-center">
+            <label class="form-check-label">
+            <input class="form-check-input my-auto" type="checkbox" value="" name="seleccion">
+            <span class="form-check-sign">
+                <span class="check"></span>
+            </span>
+            </label>
+          </div>
+        </th>
+        <th scope="col" data-sort="usuario">NOMBRE DE USUARIO</th>
+        <th scope="col" data-sort="correo">DIRECCIÓN DE CORREO ELECTRÓNICO</th>
+        <th scope="col" data-sort="nombres">NOMBRES</th>
+        <th scope="col" data-sort="apellidos">APELLIDOS</th>
+        <th scope="col" class="sort" data-sort="staff">ES STAFF</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody class="list">
+    {% if object_list %}
+      {% for user in object_list %}
+      <tr>
+        <th scope="row">
+          <div class="form-check justify-content-center">
+            <label class="form-check-label">
+            <input class="form-check-input my-auto" type="checkbox" value="">
+            <span class="form-check-sign">
+                <span class="check"></span>
+            </span>
+            </label>
+          </div>
+        </th>
+        <th scope="row">
+          <div class="media align-items-center">
+            <div class="media-body">
+              <a class="name mb-0 text-sm" href="{% url 'userdetail' user.pk %}">{{ user.username }}</a>
+            </div>
+          </div>
+        </th>
+        <td class="budget">
+          {{ user.email }}
+        </td>
+        <td>
+          <div class="avatar-group">
+            <label for="">{{ user.first_name }}</label>
+          </div>
+        </td>
+        <td>
+          <div class="avatar-group">
+            <label for="">{{ user.last_name }}</label>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <!--Verificar si user.is_staff==True (Falta)-->
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="text-right">
+          <div class="dropdown">
+            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-v"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    {% else %}
+    <h6 class="ml-3">No existen registros de usuarios</h6>
+    {% endif %}
+    </tbody>
+    <tr></tr>
+  </table>
+</div>
+</div>
+                <div class="container">
+                  <hr>
+                  <!--FALTA MOSTRAR LA CANTIDAD TOTAL DE USUARIOS-->
+                  <h6 class="ml-3">{{ object_list.count }} usuarios</h6>
+                  <hr>
+                </div>   
+            </div>
+            <div class="col-md-3">
+                <!--FILTROS-->
+                <form class="form" method="" action="">
+                  {% csrf_token %}
+                  <div class="card-header p-0 text-center text-white bg-primary">
+                    <h6 class="card-title">FILTRO</h6>
+                  </div>
+                  <!--POR STAFF-->
+                  <div class="card-header p-0 text-left ml-1">
+                    <label for="">Por es Staff</label>
+                    <a class="d-block" href="{% url 'listuser' %}">Todo</a>
+                    <a class="d-block" href="{% url 'staff' %}">Si</a>
+                    <a class="d-block" href="{% url 'nostaff' %}">No</a>
+                  </div>
+                  <!--POR SUPERUSUARIO-->
+                  <div class="card-header p-0 text-left ml-1">
+                    <label for="">Por es Superusuario</label>
+                    <a class="d-block" href="{% url 'listuser' %}">Todo</a>
+                    <a class="d-block" href="{% url 'superuser' %}">Si</a>
+                    <a class="d-block" href="{% url 'nosuperuser' %}">No</a>
+                  </div>
+                  <!--POR ACTIVO-->
+                  <div class="card-header p-0 text-left ml-1">
+                    <label for="">Por Activo</label>
+                    <a class="d-block" href="{% url 'listuser' %}">Todo</a>
+                    <a class="d-block" href="{% url 'active' %}">Si</a>
+                    <a class="d-block" href="{% url 'noactive' %}">No</a>
+                  </div>    
+                  <!--POR GRUPO-->
+                  <div class="card-header p-0 text-left ml-1">
+                    <label for="">Por Grupo</label>
+                    <a class="d-block" href="{% url 'listuser' %}">Todo</a>
+                    {% for grupo in Group %}
+                        <a class="d-block" href="">{{ Group.name }}</a>
+                    {% endfor %}
+                  </div>  
+         </div>
+      </div>   
+</div>
+
+{% endblock content %}

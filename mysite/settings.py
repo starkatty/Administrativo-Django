@@ -14,7 +14,6 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +26,6 @@ SECRET_KEY = 'y=(y3ai$3%ax7!(z_@jv03$k1!#)gvirsq^7hj19jfjk-eh&b*'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
-
 
 # Application definition
 
@@ -58,8 +56,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['%s/layouts/' % (PROJECT_DIR),
-                 ],
+        'DIRS': ['accounts/layouts',
+                 'blog/layouts'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

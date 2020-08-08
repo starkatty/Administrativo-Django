@@ -1,0 +1,41 @@
+<div class="selector">
+    <div class="selector-available">
+        <h2>grupos Disponibles 
+            <span class="help help-tooltip help-icon" title="Esta es la lista de grupos disponibles. Puede elegir algunos seleccionándolos en la caja inferior y luego haciendo clic en la flecha &quot;Elegir&quot; que hay entre las dos cajas."></span>
+        </h2>
+        <p id="id_groups_filter" class="selector-filter">
+            <label for="id_groups_input">
+                <span class="help-tooltip search-label-icon" title="Escriba en este cuadro para filtrar la lista de grupos disponibles"></span>
+            </label> 
+            <input type="text" placeholder="Filtro" id="id_groups_input">
+        </p>
+        <select name="groups_old" id="id_groups_from" multiple="" class="filtered" data-field-name="grupos" data-is-stacked="0">
+            <option value="2" title="Grupo 2">Grupo 2</option>
+            <option value="3" title="Grupo 3">Grupo 3</option>
+            <option value="4" title="Grupo 4">Grupo 4</option>
+            <option value="6" title="Probando">Probando</option>
+            <option value="7" title="Probando 2">Probando 2</option>
+            <option value="8" title="Probando 3">Probando 3</option>
+            <option value="9" title="Probando 4">Probando 4</option>
+            <option value="10" title="Probando 5">Probando 5</option>
+        </select>
+        <a title="Haga clic para seleccionar todos los grupos de una vez" href="#" id="id_groups_add_all_link" class="selector-chooseall active">Selecciona todos</a>
+    </div>
+    <ul class="selector-chooser">
+        <li>
+            <a title="Elegir" href="#" id="id_groups_add_link" class="selector-add active">Elegir</a>
+        </li>
+        <li>
+            <a title="Eliminar" href="#" id="id_groups_remove_link" class="selector-remove active">Eliminar</a></li>
+    </ul>
+    <div class="selector-chosen">
+        <h2>grupos elegidos 
+            <span class="help help-tooltip help-icon" title="Esta es la lista de los grupos elegidos. Puede elmininar algunos seleccionándolos en la caja inferior y luego haciendo click en la flecha &quot;Eliminar&quot; que hay entre las dos cajas."></span>
+        </h2>
+        <select id="id_groups_to" multiple="multiple" size="0" name="groups" class="filtered" style="height: 267.594px;">
+            <option value="1" title="Grupo 1">Grupo 1</option>
+            <option value="5" title="Grupo 5">Grupo 5</option>
+        </select>
+        <a title="Haz clic para eliminar todos los grupos elegidos" href="#" id="id_groups_remove_all_link" class="selector-clearall active">Eliminar todos</a>
+    </div>
+</div>
