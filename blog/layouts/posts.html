@@ -15,11 +15,11 @@
 
    <!--POSTS-->
     <div class="container w-100 h-100">
-        <div class="container d-flex">
+        <div class="container d-flex justify-content-between">
             <h5 for="">Escoja post a modificar</h5>
-            <form class="form" method="POST" action="PostCreate">
+            <form class="form" method="POST" action="{% url 'createpost' %}">
                 {% csrf_token %}
-                <a href="{% url 'createpost' %}" type="button" class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Post<i class="fas fa-plus"></i><a>
+                <a href="{% url 'createpost' %}" type="button" class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Post  <i class="fas fa-plus"></i><a>
             </form>
             
         </div>
@@ -36,7 +36,7 @@
                         <option value="delete_selected">Eliminar usuarios seleccionado/s</option>
                         </select>
                         <button class="btn btn-primary btn-wd btn-sm ml-auto">Ir</button>
-                        <label for="">Seleccionados 0 de 1</label>
+                        <label for="">Seleccionados 0 de {{ object_list.count }}</label>
                     </div>
                     
                     <!--TABLA DE USUARIOS-->
@@ -85,7 +85,7 @@
                     </div>
                                     <div class="container">
                                         <hr>
-                                        <h6 class="ml-3">0 Posts</h6>
+                                        <h6 class="ml-3">{{ object_list.count }} Posts</h6>
                                         <hr>
                                     </div>   
                         </div>

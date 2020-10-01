@@ -21,21 +21,23 @@
       <div class="row">
           <div class="col-md-12">
               <h5 class="ml-3">{% block titule %} Añadir Post {% endblock titule %}</h5>
-              <form class="form" method="POST" action="crear">
+              <form class="form" method="POST" action="{% url 'createpost' %}">
                 {% csrf_token %}
                 
                 <!--AUTOR-->
                 <div class="container mt-5">
                     <label class="mr-3 font-weight-bold" for="">Author:</label>
                     <select class="mr-1" name="action" required>
-                    <form class="form" method="POST" action="UserList">
+                    <form class="form" method="POST" action="{% url 'listuser' %}">
+                        {% if object_list %}
                         {% for user in objetc_list %}
-                        <option value="delete_selected">{{ user.username }}</option>
+                        <option value="">{{ user.username }}</option>
                         {% endfor %}
+                        {% endif %}
                     </form>
                     </select>
                     <i class="fas fa-pencil-alt mr-2"></i>
-                    <a href="user/create"><i class="fas fa-plus"></i></a>
+                    <a href="{% url 'createuser' %}"><i class="fas fa-plus"></i></a>
                 </div>
                 <hr>
                 <!--TITULO-->

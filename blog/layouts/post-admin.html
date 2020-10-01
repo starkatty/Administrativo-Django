@@ -11,8 +11,8 @@
       <div class="form-group d-flex justify-content-between mt-3">
         <label class="font-weight-bold" for="posts">Posts</label>
         <div class="container d-flex ml-auto justify-content-end">
-          <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
-          <a href=""><i class="far fa-edit"></i> Modificar</a>
+          <a class="d-inline-block mr-3" href="{% url 'createpost' %}"><i class="fas fa-plus"></i> Añadir</a>
+          <a href="{% url 'updatepost' %}"><i class="far fa-edit"></i> Modificar</a>
         </div>  
       </div>
       <hr>

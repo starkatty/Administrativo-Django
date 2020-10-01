@@ -18,7 +18,7 @@
       <div class="container d-flex justify-content-between">
         <h5 for="">Escoja usuario a modificar</h5>
         <!--LLAMAR A LA VISTA createuser AL PRESIONAR EL BOTON-->
-        <form class="form" method="POST" action="create">
+        <form class="form" method="POST" action="{% url 'createuser' %}">
           {% csrf_token %}
           <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Usuario  <i class="fas fa-plus"></i></button>
         </form>
@@ -140,7 +140,7 @@
 </div>
                 <div class="container">
                   <hr>
-                  <!--FALTA MOSTRAR LA CANTIDAD TOTAL DE USUARIOS-->
+                  <!--CANTIDAD TOTAL DE USUARIOS-->
                   <h6 class="ml-3">{{ object_list.count }} usuarios</h6>
                   <hr>
                 </div>   

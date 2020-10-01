@@ -1,6 +1,6 @@
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView 
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -14,40 +14,31 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as do_logout
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-def login(request):
-    # Creamos el formulario de autenticación vacío
-    form = AuthenticationForm()
-    if request.method == "POST":
-        # Añadimos los datos recibidos al formulario
-        form = AuthenticationForm(data=request.POST)
-        # Si el formulario es válido...
-        if form.is_valid():
-            # Recuperamos las credenciales validadas
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            # Verificamos las credenciales del usuario
-            user = authenticate(username=username, password=password)
-
-            # Si existe un usuario con ese nombre y contraseña
-            if user is not None:
-                # Hacemos el login manualmente
-                do_login(request, user)
-                # Y le redireccionamos a la portada
-                return redirect('welcome.html')
-
-    # Si llegamos al final renderizamos el formulario
-    return render(request, "login.html")
+#Vista para el login del usuario
+class Login(LoginRequiredMixin, View):
+    model=User
+    form=RegisterUserForm
+    login_url='accounts/login.html'
+    redirect_field_name='redirect_to'
+    template_name='accounts/login.html'
+    fields=[
+            'username',
+            'password',
+        ]
+    def get_success_url(self):
+        return reverse_lazy('welcome')
 
 #Vistas para los usuarios
+
+#Listar los usuarios
 class UserList(ListView):
     model=User
     template_name='accounts/users.html'
-    #count_user=model.objects.count()
-    #return render (request, "accounts/users.html", {'count_user': count_user})
+    #paginate_by=10
 
-    
+#Crear usuario    
 class UserCreate(SuccessMessageMixin, CreateView):
     model=User
     form=RegisterUserForm
@@ -61,6 +52,7 @@ class UserCreate(SuccessMessageMixin, CreateView):
         messages.success(self.request, success_message)
         return reverse_lazy('createuser')
 
+#Modificar usuario
 class UserUpdate(SuccessMessageMixin, UpdateView):
     model=User
     form=EditUserForm
@@ -68,9 +60,10 @@ class UserUpdate(SuccessMessageMixin, UpdateView):
     fields= '__all__'
     def get_success_url(self):
         success_message="El Usuario ha sido actualizado correctamente"
-        essages.success(self.request, success_message)
+        messages.success(self.request, success_message)
         return reverse_lazy('userdetail')
 
+#Modificar Password
 class PasswordUpdate(SuccessMessageMixin, UpdateView):
     model=User
     form=RegisterUserForm
@@ -78,9 +71,10 @@ class PasswordUpdate(SuccessMessageMixin, UpdateView):
     fields="__all__"
     def get_success_url(self):
         success_message="El Password ha sido actualizado correctamente"
-        essages.success(self.request, success_message)
+        messages.success(self.request, success_message)
         return reverse_lazy('listuser')
 
+#Modificar usuario
 class UserDelete(SuccessMessageMixin, DeleteView):
     model=User
     template_name='accounts/user_confirm_delete.html'
@@ -89,10 +83,12 @@ class UserDelete(SuccessMessageMixin, DeleteView):
         messages.success(self.request, (success_message))
         return reverse_lazy('listuser')
 
+#Busqueda de usuario
 class UserListSearch(ListView):
     model=User
     template_name='accounts/users.html'
 
+#Lista de usuarios staff
 class Staff (ListView):
     model=User
     template_name='accounts/users.html'
@@ -102,6 +98,7 @@ class Staff (ListView):
     def get_success_url(self):
         return reverse_lazy('staff')
 
+#Lista de usuarios nostaff
 class NoStaff (ListView):
     model=User
     template_name='accounts/users.html'
@@ -111,6 +108,7 @@ class NoStaff (ListView):
     def get_success_url(self):
         return reverse_lazy('nostaff')
 
+#Lista de usuarios superuser
 class Superuser (ListView):
     model=User
     template_name='accounts/users.html'
@@ -120,6 +118,7 @@ class Superuser (ListView):
     def get_success_url(self):
         return reverse_lazy('superuser')
 
+#Lista de usuarios nosuperuser
 class NoSuperuser (ListView):
     model=User
     template_name='accounts/users.html'
@@ -129,6 +128,7 @@ class NoSuperuser (ListView):
     def get_success_url(self):
         return reverse_lazy('nosuperuser')
 
+#Lista de usuarios active
 class Active (ListView):
     model=User
     template_name='accounts/users.html'
@@ -138,6 +138,7 @@ class Active (ListView):
     def get_success_url(self):
         return reverse_lazy('active')
 
+#Lista de usuarios noactive
 class NoActive (ListView):
     model=User
     template_name='accounts/users.html'
@@ -148,10 +149,12 @@ class NoActive (ListView):
         return reverse_lazy('noactive')
    
 #Vistas para los grupos
+#Lista de grupos
 class GroupsList(ListView):
     model=Group
     template_name='groups.html'
 
+#Crear grupo
 class GroupCreate(SuccessMessageMixin, CreateView):
     model=Group
     form=RegisterGroupForm
@@ -164,6 +167,7 @@ class GroupCreate(SuccessMessageMixin, CreateView):
         messages.success(self.request, success_message)
         return reverse_lazy('creategroup')
 
+#Modificar grupo
 class GroupUpdate(SuccessMessageMixin, UpdateView):
     model=Group
     form=RegisterGroupForm
@@ -174,6 +178,7 @@ class GroupUpdate(SuccessMessageMixin, UpdateView):
         messages.success(self.request, success_message)
         return reverse_lazy('groupdetail')
 
+#Modificar Password del Grupo
 class GroupPasswordUpdate(SuccessMessageMixin, UpdateView):
     model=Group
     form=RegisterGroupForm
@@ -184,6 +189,7 @@ class GroupPasswordUpdate(SuccessMessageMixin, UpdateView):
         messages.success(self.request, success_message)
         return reverse_lazy('grouplist')
 
+#Eliminar grupo
 class GroupDelete(SuccessMessageMixin, DeleteView):
     model=Group
     template_name='accounts/group_confirm_delete.html'
@@ -192,7 +198,7 @@ class GroupDelete(SuccessMessageMixin, DeleteView):
         messages.success(self.request, (success_message))
         return reverse_lazy('grouplist')
 
-# Creando para modificar la Contraseña
+# Modificar la Contraseña
 class ModifidPassword(SuccessMessageMixin, UpdateView):
     template_name="blog/update-password.html"
     fields="__all_"
@@ -200,16 +206,18 @@ class ModifidPassword(SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('listpost')
 
+#Registro
 def register(request):
     return render(request, "accounts/register.html")
 
-
+#Logout
 def logout(request):
     # Finalizamos la sesión
     do_logout(request)
     # Redireccionamos a la portada
     return redirect('/')
 
+#Welcome
 def welcome(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:

@@ -5,11 +5,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.login, name='login'),
+    
+    #Autenticación de Usuarios
+    path('', Login.as_view(template_name="login.html"), name='login'),
     path('logout/', views.logout),
     path('welcome/', views.welcome, name='welcome'),
     path('userregister/', views.userregister, name='userregister'),
     path('authent_autori/', views.authent_autori, name='authent_autori'),
+    
     #Usuarios
     path('user/', UserList.as_view(template_name="users.html"), name='listuser'),
     path('user/detail/<int:pk>', UserUpdate.as_view(template_name="user-detail.html"), name='userdetail'),
@@ -18,7 +21,7 @@ urlpatterns = [
     path('user/delete/<int:pk>', UserDelete.as_view(template_name="user_confirm_delete.html"), name='deleteuser'),   
     path('user/<int:pk>', UserListSearch.as_view(template_name="users.html"), name='userlistsearch'),
 
-    #Filtros
+    #Filtros para los usuarios
     path('user/staff', Staff.as_view(template_name="users.html"), name='staff'),
     path('user/nostaff', NoStaff.as_view(template_name="users.html"), name='nostaff'),
     path('user/superuser', Superuser.as_view(template_name="users.html"), name='superuser'),

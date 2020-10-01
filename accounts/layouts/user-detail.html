@@ -44,7 +44,6 @@
                       <!--<input type="password" class="form-control d-inline w-25" id="contrasena" placeholder="Contraseña" value="{{ user.password }}>-->
 
                       <p class="text-muted textsize mt-2">Las contraseñas sin procesar no se almacenan, por lo que no hay forma de ver la contraseña de este usuario, pero puedes cambiar la contraseña usando este formulario</p>
-                      
                       <p class="text-muted textsize mt-2">Su contraseña no puede asemejarse tanto a su otra información personal.</p>
                       <p class="text-muted textsize">Su contraseña debe contener al menos 8 caracteres.</p>
                       <p class="text-muted textsize">Su contraseña no puede ser una clave utilizada comunmente.</p>
@@ -104,7 +103,7 @@
                   <div class="col-md-12">
                     <div class="form-check justify-content-center">
                       <label class="form-check-label font-weight-bold">
-                      <input class="form-check-input my-auto" type="checkbox" value="">
+                      <input class="form-check-input my-auto" type="checkbox" value="active">
                       <span class="form-check-sign">
                           <span class="check"></span>
                       </span>
@@ -171,17 +170,14 @@
                                   <input type="text" placeholder="Filtro" id="id_groups_input">
                                 </p>
 
-
-
-
                                 <!--GRUPOS DISPONIBLES-->
+
                                 <div class="related-widget-wrapper">
                                     <select name="groups" id="id_groups" multiple class="selectfilter" data-field-name="grupos" data-is-stacked="0">
+                                      {%for grupo in Group %}
                                         <option value="1" selected>Grupo 1</option>
                                         <option value="2">Grupo 2</option>
-                                        <option value="3">Grupo 3</option>
-                                        <option value="4">Grupo 4</option>
-                                        <option value="5" selected>Grupo 5</option>
+                                      {% endfor %}
                                     </select>
                                   </div>
                               </div>

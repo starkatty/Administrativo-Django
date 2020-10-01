@@ -10,16 +10,16 @@
           <div class="form-group d-flex mt-3">
             <label class="font-weight-bold" for="grupos">Grupos</label>
                   <div class="container d-flex ml-auto justify-content-end">
-                    <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
-                    <a href=""><i class="far fa-edit"></i> Modificar</a>
+                    <a class="d-inline-block mr-3" href="{% url 'creategroup' %}"><i class="fas fa-plus"></i> Añadir</a>
+                    <a href="{% url 'groupupdatepassword' %}"><i class="far fa-edit"></i> Modificar</a>
                   </div>  
           </div>
           <hr>
           <div class="form-group d-flex justify-content-between">
             <label class="font-weight-bold" for="Usuarios">Usuarios</label>
             <div class="container d-flex ml-auto justify-content-end">
-              <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
-              <a href=""><i class="far fa-edit"></i> Modificar</a>
+              <a class="d-inline-block mr-3" href="{% url 'createuser' %}"><i class="fas fa-plus"></i> Añadir</a>
+              <a href="{% url 'updateuser' %}"><i class="far fa-edit"></i> Modificar</a>
             </div>  
           </div>
           <hr>
