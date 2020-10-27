@@ -1,37 +1,50 @@
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, View
-from django.views.generic.edit import CreateView, UpdateView, DeleteView 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView  
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django import forms
 from django.contrib.auth.models import User, Group
 from accounts.forms import *
-from django.contrib.auth import authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as do_logout
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from accounts.models import Perfil
 
 #Vista para el login del usuario
-class Login(LoginRequiredMixin, View):
-    model=User
-    form=RegisterUserForm
-    login_url='accounts/login.html'
-    redirect_field_name='redirect_to'
-    template_name='accounts/login.html'
-    fields=[
-            'username',
-            'password',
-        ]
-    def get_success_url(self):
-        return reverse_lazy('welcome')
+class SignUpView(CreateView):
+    model = User
+    form_class = RegisterUserForm
+    template_name = 'accounts/welcome.html'
+    def form_valid(self, form):
+        form.save()
+        usuario = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        usuario = authenticate(username=usuario, password=password)
+        login(self.request, usuario)
+        return redirect('/')
 
+#Vista para la bienvenida al usuario
+class WelcomeView(TemplateView):
+   template_name = 'accounts/welcome.html'
+
+#Vista para iniciar sesión
+class SignInView(LoginView):
+    template_name = 'accounts/login.html'
+
+#Vista para el logout
+class SignOutView(LogoutView):
+    template_name = 'accounts/login.html'
+    pass
+    
 #Vistas para los usuarios
-
 #Listar los usuarios
 class UserList(ListView):
     model=User

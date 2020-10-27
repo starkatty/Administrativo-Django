@@ -30,7 +30,12 @@
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link">BIENVENDO/A, {{request.user.username}}</a>
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                        <a class="nav-link">BIENVENDO/A, {{ user.username }}</a>
+                    {% else %}
+                        <a>Usuario No Registrado</a>
+                    {% endif %} 
                 </li>
                 <li class="nav-item active">
                 <a class="nav-link" href="{% url 'welcome' %}">VER EL SITIO /</a>
@@ -39,7 +44,7 @@
                 <a class="nav-link" href="{% url 'updateuser' user.pk %}">CAMBIAR CONTRASEÑA /</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/logout">TERMINAR SESIÓN</a>
+                <a class="nav-link" href="{% url 'logout' %}">TERMINAR SESIÓN</a>
                 </li>
             </ul>
             </div>

@@ -128,4 +128,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Redirect to home URL after login (defecto /accounts/profile)
-LOGIN_REDIRECT_URL='accounts/welcome'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/welcome/'
+
+#Logout
+LOGOUT_REDIRECT_URL = '/accounts/login/'

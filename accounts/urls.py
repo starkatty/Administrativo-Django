@@ -6,10 +6,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     
-    #Autenticación de Usuarios
-    path('', Login.as_view(template_name="login.html"), name='login'),
-    path('logout/', views.logout),
-    path('welcome/', views.welcome, name='welcome'),
+    #Autenticación de Usuarios 
+    path('login/', SignInView.as_view(template_name="login.html"), name='login'),  
+    path('login_user/', SignUpView.as_view(template_name="welcome.html"), name='Sign'),
+    path('logout/', SignOutView.as_view(template_name="login.html"), name='logout'),
+    path('welcome/', WelcomeView.as_view(template_name="welcome.html"), name='welcome'),
+    
+    
     path('userregister/', views.userregister, name='userregister'),
     path('authent_autori/', views.authent_autori, name='authent_autori'),
     

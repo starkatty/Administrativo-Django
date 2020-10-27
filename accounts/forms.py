@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
+from .models import Perfil
 
 class RegisterUserForm (UserCreationForm):
     class Meta:
-        models=User
+        model=User
         fields=[
             'username',
             'password',
@@ -16,7 +17,7 @@ class RegisterUserForm (UserCreationForm):
 
 class EditUserForm (UserCreationForm):
     class Meta:
-        models=User
+        model=User
         fields= '__all__'
         labels={
             'username': 'Nombre de Usuario',
@@ -31,7 +32,7 @@ class EditUserForm (UserCreationForm):
 
 class RegisterGroupForm (forms.ModelForm):
     class Meta:
-        models=Group
+        model=Group
         fields= '__all__'
         labels={
             'name': 'Nombre de Grupo',
