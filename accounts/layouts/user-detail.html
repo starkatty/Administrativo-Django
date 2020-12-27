@@ -174,10 +174,11 @@
 
                                 <div class="related-widget-wrapper">
                                     <select name="groups" id="id_groups" multiple class="selectfilter" data-field-name="grupos" data-is-stacked="0">
-                                      {%for grupo in Group %}
-                                        <option value="1" selected>Grupo 1</option>
-                                        <option value="2">Grupo 2</option>
+                                      {% if group_list %}
+                                      {% for group in group_list %}
+                                          <option value="{{ group.name }}">{{ group.name }}</option>
                                       {% endfor %}
+                                      {% endif %}
                                     </select>
                                   </div>
                               </div>
@@ -189,7 +190,7 @@
                                   </select>
                                   
                                   <a class="related-widget-wrapper-link add-related" id="add_id_groups"
-                                    href="/admin/auth/group/add/?_to_field=id&amp;_popup=1"
+                                    href="{% url 'creategroup' %}"
                                     title="Añadir otro grupo"><img src="/static/admin/img/icon-addlink.svg" alt="Añadir"></a>
                             </div> 
                             </div>

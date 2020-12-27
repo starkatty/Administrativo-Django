@@ -39,7 +39,7 @@
       <option value="delete_selected">Eliminar grupos seleccionado/s</option>
     </select>
     <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Ir</button>
-    <label for="">Seleccionados 0 de 1</label>
+    <label for="">Seleccionados 0 de {{ group_list.count }}</label>
   </div>
 </form>
 
@@ -65,7 +65,7 @@
       </tr>
     </thead>
     <tbody class="list">
-      {% for group in object_list %}
+      {% for group in group_list %}
       <tr>
         <th scope="row">
           <div class="form-check justify-content-center">
@@ -94,7 +94,7 @@
 </div>
                 <div class="container">
                   <hr>
-                  <h6 class="ml-3">{{ object_list }} grupos</h6>
+                  <h6 class="ml-3">{{ group_list.count }} grupos</h6>
                   <hr>
                 </div>   
 </div>

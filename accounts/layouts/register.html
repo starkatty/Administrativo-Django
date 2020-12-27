@@ -1,3 +1,4 @@
+{% extends 'welcome.html' %} 
 {% block content %}           
 <!--NAVEGACION-->
 <div class="container">
@@ -18,13 +19,14 @@
       <div class="row">
           <div class="col-md-12">
               <h5 class="ml-3">Añadir Usuario</h5>
-              <form class="form" method="POST" action="" enctype="multipart/form-data">
+              <form class="form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p class="ml-3">Primero introduzca un nombre de usuario y una contraseña. Luego podrá editar el resto de opciones del usuario.</p>
 
                 <!--NOMBRE DE USUARIO-->
                 <div class="container mt-5 d-flex d-inline">
                     <div class="col-md-3">
+                        <!--{{ form.username.label }}-->
                         <label class="mr-3 font-weight-bold" for="">Nombre de usuario:</label>
                     </div>
                     <div class="col-md-9">
@@ -66,15 +68,29 @@
 
                 <!--BOTONES-->
                 <div class="container mt-3 d-flex justify-content-end bg-light">
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y añadir otro</button>
-                    </div>
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y continuar editando</button>
-                    </div>
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">GRABAR</button>
-                    </div>  
+
+                    <!--<form class="form" method="POST" action="{% url 'createuser' %}">
+                        {% csrf_token %}
+                        Grabar el usuario y devolver a la misma página con los campos vacios para poder agrega otro usuario
+                        <div class="p-2">-->
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y añadir otro</button>
+                        <!--</div>
+                    </form>
+                    <form class="form" method="POST" action="{% url 'createuser' %}">
+                        {% csrf_token %}
+                        Grabar el usuario y devolver a la misma página con los datos del mismo usuario creado
+                        <div class="p-2">-->
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto"type="submit">Grabar y continuar editando</button>
+                        <!--</div>
+                    </form>-->
+                    <form class="form" method="POST" action="{% url 'createuser' %}">
+                        {% csrf_token %}
+                        <!--Grabar el usuario y devolver a la misma página con los campos vacios para poder agrega otro usuario-->
+                        <div class="p-2">
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">GRABAR</button>
+                        </div>
+                    </form> 
+                </div> 
                 </div>
                 <hr>
               </form>
@@ -82,20 +98,5 @@
       </div>
   </div>
   
+{% endblock content%}
 
-  {% endblock content%}
-
-
-<!--
-<h2>Registrar usuario</h2>
-
-<form method="POST">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <button type="submit">Registrar</button>
-</form>
-
-<hr />
-
-<a href="/login">Iniciar sesión</a>
--->

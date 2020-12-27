@@ -8,9 +8,9 @@ urlpatterns = [
     
     #Autenticación de Usuarios 
     path('login/', SignInView.as_view(template_name="login.html"), name='login'),  
-    path('login_user/', SignUpView.as_view(template_name="welcome.html"), name='Sign'),
+    #path('login_user/', SignUpView.as_view(template_name="users-register.html"), name='Sign'),
     path('logout/', SignOutView.as_view(template_name="login.html"), name='logout'),
-    path('welcome/', WelcomeView.as_view(template_name="welcome.html"), name='welcome'),
+    path('welcome/', WelcomeView.as_view(template_name="users-register.html"), name='welcome'),
     
     
     path('userregister/', views.userregister, name='userregister'),
@@ -22,7 +22,6 @@ urlpatterns = [
     path('user/create', UserCreate.as_view(template_name="register.html"), name='createuser'),
     path('user/edit/<int:pk>', PasswordUpdate.as_view(template_name="update-password.html"), name='updateuser'),
     path('user/delete/<int:pk>', UserDelete.as_view(template_name="user_confirm_delete.html"), name='deleteuser'),   
-    path('user/<int:pk>', UserListSearch.as_view(template_name="users.html"), name='userlistsearch'),
 
     #Filtros para los usuarios
     path('user/staff', Staff.as_view(template_name="users.html"), name='staff'),
@@ -31,6 +30,7 @@ urlpatterns = [
     path('user/nosuperuser', NoSuperuser.as_view(template_name="users.html"), name='nosuperuser'),
     path('user/active', Active.as_view(template_name="users.html"), name='active'),
     path('user/noactive', NoActive.as_view(template_name="users.html"), name='noactive'),
+    path('user/usersearch', UserListSearch.as_view(template_name="users.html"), name='usersearch'),
 
     #Grupos
     path('groups/', GroupsList.as_view(template_name="groups.html"), name='groups'),

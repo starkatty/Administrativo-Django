@@ -12,8 +12,7 @@ urlpatterns = [
     path('posts/admin/', views.PostsAdmin, name='postadmin'),
     path('posts/create', PostCreate.as_view(template_name="create-post.html"), name='createpost'),
     path('posts/edit/<int:pk>', PostUpdate.as_view(template_name="post-detail.html"), name='updatepost'),
-    path('posts/delete/<int:pk>', PostDelete.as_view(), name='deletepost'), 
-    path('user/', UserList.as_view(template_name="accounts/users.html"), name='listuser'),  
+    path('posts/delete/<int:pk>', PostDelete.as_view(), name='deletepost'),  
 ]
 
 

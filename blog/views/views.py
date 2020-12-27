@@ -26,10 +26,14 @@ class PostCreate(SuccessMessageMixin, CreateView):
     form=PostForm
     template_name='create-post.html'
     fields="__all__"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author_list'] = User.objects.all()
+        return context  
     def get_success_url(self):
         success_message='El Post fue creado corectamente'
         messages.success(self.request, success_message)
-        return reverse_lazy('listpost')    
+        return reverse_lazy('createpost')  
 
 #Detalle del Post
 class PostDetail(DetailView):

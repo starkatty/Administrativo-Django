@@ -19,17 +19,17 @@
                                         <div class="container">
                                             <form>
                                               <div class="form-group d-flex mt-3">
-                                                <label class="font-weight-bold" for="grupos">Grupos</label>
+                                                <a class="font-weight-bold" for="grupos" href="{% url 'groups' %}">Grupos</a>
                                                       <div class="container d-flex ml-auto justify-content-end">
-                                                        <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
+                                                        <a class="d-inline-block mr-3" href="{% url 'creategroup' %}"><i class="fas fa-plus"></i> Añadir</a>
                                                         <a href=""><i class="far fa-edit"></i> Modificar</a>
                                                       </div>  
                                               </div>
                                               <hr>
                                               <div class="form-group d-flex justify-content-between">
-                                                <label class="font-weight-bold" for="Usuarios">Usuarios</label>
+                                                <a class="font-weight-bold" for="Usuarios" href="{% url 'listuser' %}">Usuarios</a>
                                                 <div class="container d-flex ml-auto justify-content-end">
-                                                  <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
+                                                  <a class="d-inline-block mr-3" href="{% url 'createuser' %}"><i class="fas fa-plus"></i> Añadir</a>
                                                   <a href=""><i class="far fa-edit"></i> Modificar</a>
                                                 </div>  
                                               </div>
@@ -46,9 +46,9 @@
                                       <div class="container">
                                         <form>
                                           <div class="form-group d-flex justify-content-between mt-3">
-                                            <label class="font-weight-bold" for="posts">Posts</label>
+                                            <a class="font-weight-bold" for="posts" href="{% url 'listpost' %}">Posts</a>
                                             <div class="container d-flex ml-auto justify-content-end">
-                                              <a class="d-inline-block mr-3" href=""><i class="fas fa-plus"></i> Añadir</a>
+                                              <a class="d-inline-block mr-3" href="{% url 'createpost' %}"><i class="fas fa-plus"></i> Añadir</a>
                                               <a href=""><i class="far fa-edit"></i> Modificar</a>
                                             </div>  
                                           </div>

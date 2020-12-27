@@ -27,29 +27,31 @@
                 <!--AUTOR-->
                 <div class="container mt-5">
                     <label class="mr-3 font-weight-bold" for="">Author:</label>
-                    <select class="mr-1" name="action" required>
+                    <select class="mr-1" name="author" required>
                     <form class="form" method="POST" action="{% url 'listuser' %}">
-                        {% if object_list %}
-                        {% for user in objetc_list %}
-                        <option value="">{{ user.username }}</option>
+                        {% if author_list %}
+                        {% for user in author_list %}
+                        <option value="{{ user.username }}">{{ user.username }}</option>
                         {% endfor %}
                         {% endif %}
                     </form>
                     </select>
-                    <i class="fas fa-pencil-alt mr-2"></i>
+                    <a href="{% url 'userdetail' user.pk %}"><i class="fas fa-pencil-alt mr-2"></i></a>
                     <a href="{% url 'createuser' %}"><i class="fas fa-plus"></i></a>
                 </div>
                 <hr>
                 <!--TITULO-->
                 <div class="container mt-3">
                     <label class="mr-3 font-weight-bold" for="">Title:</label>
-                    <input type="text" class="form-control d-inline w-50" id="titulo" name="titulo" placeholder="titulo" value="{{ post.title }}">
+                    {{ form.title }}
+                    <!--<input type="text" class="form-control d-inline w-50" id="titulo" name="titulo" placeholder="titulo" value="{{ post.title }}">-->
                 </div> 
                 <hr>
                 <!--TEXTO-->
                 <div class="container mt-3">
                     <label class="mr-3 font-weight-bold" for="">Text:</label>
-                    <textarea class="d-inline" name="texto" id="textopost" cols="100" rows="10">{{ post.text }}</textarea>
+                    {{ form.text }}
+                    <!--<textarea class="d-inline" name="texto" id="textopost" cols="100" rows="10">{{ post.text }}</textarea>-->
                 </div>
                 <hr>
                 <!--FECHA DE CREACION-->
@@ -57,7 +59,8 @@
                     <div class="row d-flex d-inline">
                         <label class="mr-3 font-weight-bold" for="">Created date:</label>
                         <p class="datetime">
-                        Fecha: <input type="text" name="created_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> 
+                        Fecha: {{ form.created_date }}
+                        <!--<input type="text" name="created_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> -->
                         <a class="mr-2" href="">Hoy</a>
                         <p class="mr-2">|</p>
                         <i class="fas fa-calendar-alt mr-2"></i>
@@ -66,7 +69,8 @@
                     </div> 
                     <div class="row d-flex d-inline">
                         <p class="datetime">
-                        Hora: <input type="text" name="created_date_1" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">    
+                        Hora: {{ form.created_hour }}
+                        <!--<input type="text" name="created_hour_0" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">-->
                         <a class="mr-2" href="">Ahora</a>
                         <p class="mr-2">|</p>
                         <i class="fas fa-clock mr-2"></i>
@@ -79,7 +83,8 @@
                     <div class="row d-flex d-inline">
                         <label class="mr-3 font-weight-bold" for="">Published date:</label>
                         <p class="datetime">
-                        Fecha: <input type="text" name="published_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> 
+                        Fecha: {{ form.published_date }}
+                        <!--<input type="text" name="published_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> -->
                         <a class="mr-2" href="">Hoy</a>
                         <p class="mr-2">|</p>
                         <i class="fas fa-calendar-alt mr-2"></i>
@@ -88,7 +93,8 @@
                     </div> 
                     <div class="row d-flex d-inline">
                         <p class="datetime">
-                        Hora: <input type="text" name="published_date_1" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">    
+                        Hora: {{ form.published_hour }}
+                        <!--<input type="text" name="published_hour_0" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">-->
                         <a class="mr-2" href="">Ahora</a>
                         <p class="mr-2">|</p>
                         <i class="fas fa-clock mr-2"></i>
@@ -98,18 +104,32 @@
                 <hr>
                 <!--BOTONES-->
                 <div class="container mt-3 d-flex justify-content-end bg-light">
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto">ELIMINAR</button>
-                    </div> 
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto">Grabar y añadir otro</button>
-                    </div>
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto">Grabar y continuar editando</button>
-                    </div>
-                    <div class="p-2">
-                        <button class="btn btn-primary btn-wd btn-sm ml-auto">GRABAR</button>
-                    </div>  
+                    <form class="form" method="POST" action="">
+                        {% csrf_token %}
+                        <div class="p-2">
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">ELIMINAR</button>
+                        </div> 
+                    </form>
+                    <form class="form" method="POST" action="{% url 'createpost' %}">
+                        {% csrf_token %}
+                        <!--Grabar el post y devolver a la misma página con los campos vacios para poder agrega otro post-->
+                        <div class="p-2">
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y añadir otro</button>
+                        </div>
+                    </form>
+                    <form class="form" method="POST" action="{% url 'createpost' %}">
+                        {% csrf_token %}
+                        <!--Grabar el post y devolver a la misma página con los datos del mismo post creado-->
+                        <div class="p-2">
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y continuar editando</button>
+                        </div>
+                    </form>
+                    <form class="form" method="POST" action="{% url 'createpost' %}">
+                        {% csrf_token %}
+                        <div class="p-2">
+                            <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">GRABAR</button>
+                        </div> 
+                    </form>
                 </div>
                 <hr>
               </form>

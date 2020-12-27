@@ -17,27 +17,26 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import Perfil
-
-#Vista para el login del usuario
-class SignUpView(CreateView):
-    model = User
-    form_class = RegisterUserForm
-    template_name = 'accounts/welcome.html'
-    def form_valid(self, form):
-        form.save()
-        usuario = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password')
-        usuario = authenticate(username=usuario, password=password)
-        login(self.request, usuario)
-        return redirect('/')
+from django.contrib.auth.hashers import make_password
 
 #Vista para la bienvenida al usuario
 class WelcomeView(TemplateView):
-   template_name = 'accounts/welcome.html'
+   template_name = 'accounts/users-register.html'
 
-#Vista para iniciar sesión
+#Vista para el login
 class SignInView(LoginView):
     template_name = 'accounts/login.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(setting.LOGIN_REDIRECT_URL)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Login to your account'
+        context['register_url'] = reverse_lazy('createuser')
+        return context
 
 #Vista para el logout
 class SignOutView(LogoutView):
@@ -49,6 +48,7 @@ class SignOutView(LogoutView):
 class UserList(ListView):
     model=User
     template_name='accounts/users.html'
+    #Falta realizar la paginación
     #paginate_by=10
 
 #Crear usuario    
@@ -60,6 +60,19 @@ class UserCreate(SuccessMessageMixin, CreateView):
             'username',
             'password',
         ]
+
+    def form_valid(self, form):
+        c = {'form': form, }
+        user = form.save(commit=False)
+        # Cleaned(normalized) data
+        password = form.cleaned_data['password']
+        print (password)
+        user.set_password(password)
+        user.save()
+        # Create User model
+        User.objects.create(user=user)
+        return super(UserCreate, self).form_valid(form)
+
     def get_success_url(self):
         success_message='El Usuario fue creado corectamente'
         messages.success(self.request, success_message)
@@ -75,6 +88,10 @@ class UserUpdate(SuccessMessageMixin, UpdateView):
         success_message="El Usuario ha sido actualizado correctamente"
         messages.success(self.request, success_message)
         return reverse_lazy('userdetail')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['group_list'] = Group.objects.all()
+        return context
 
 #Modificar Password
 class PasswordUpdate(SuccessMessageMixin, UpdateView):
@@ -87,7 +104,7 @@ class PasswordUpdate(SuccessMessageMixin, UpdateView):
         messages.success(self.request, success_message)
         return reverse_lazy('listuser')
 
-#Modificar usuario
+#Eliminar usuario
 class UserDelete(SuccessMessageMixin, DeleteView):
     model=User
     template_name='accounts/user_confirm_delete.html'
@@ -96,10 +113,21 @@ class UserDelete(SuccessMessageMixin, DeleteView):
         messages.success(self.request, (success_message))
         return reverse_lazy('listuser')
 
-#Busqueda de usuario
+#Busqueda de un usuario
 class UserListSearch(ListView):
-    model=User
+    form_class=SearchUserForm
+    initial={'username':' '}
     template_name='accounts/users.html'
+    def get(self, request, *args, **kwargs):
+        form=self.form_class(initial=self.initial)
+        name=request.GET['usersearch']
+        result=User.objects.filter(username__iexact=name)
+        result_total=result.first()
+        form=self.form_class(result_total)
+        return render (request, self.template_name, {'form':form})
+        #Falta retornar el registro del usuario para que se muestre en el listado de los usuarios
+    def get_success_url(self):
+        return reverse_lazy('listuser') 
 
 #Lista de usuarios staff
 class Staff (ListView):
@@ -166,6 +194,7 @@ class NoActive (ListView):
 class GroupsList(ListView):
     model=Group
     template_name='groups.html'
+    context_object_name='group_list'
 
 #Crear grupo
 class GroupCreate(SuccessMessageMixin, CreateView):
@@ -220,43 +249,6 @@ class ModifidPassword(SuccessMessageMixin, UpdateView):
         return reverse_lazy('listpost')
 
 #Registro
-def register(request):
-    return render(request, "accounts/register.html")
-
-#Logout
-def logout(request):
-    # Finalizamos la sesión
-    do_logout(request)
-    # Redireccionamos a la portada
-    return redirect('/')
-
-#Welcome
-def welcome(request):
-    # Si estamos identificados devolvemos la portada
-    if request.user.is_authenticated:
-        return render(request, "welcome.html")
-    # En otro caso redireccionamos al login
-    return redirect('/login')
-
-
-'''
-def registeruser(request):
-    nombre_user= request.POST["nombre"]
-    contrasena_user= request.POST["contrasena"]
-    confirm_contrasena_user= request.POST["contrasenaconfirmacion"]
-    if contrasena_user==confirm_contrasena_user:
-        auth_user.username=nombre_user
-        auth_user.password=contrasena_user
-        auth_user.save()
-        mensaje="Usuario Registrado"
-    else:
-        mensaje="Introduzca valores correctos"
-    return render(request, "blog/register.html",{'mensaje': mensaje}) 
-
-def modifidpassword(request):
-    return render(request, "blog/update-password.html", {})
-
-'''
 def userregister(request):
     return render(request, "users-register.html")
 

@@ -31,17 +31,17 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     {% csrf_token %}
-                    {% if user.is_authenticated %}
-                        <a class="nav-link">BIENVENDO/A, {{ user.username }}</a>
-                    {% else %}
-                        <a>Usuario No Registrado</a>
-                    {% endif %} 
+                        {% if user.is_authenticated %}
+                            <a class="nav-link">BIENVENDO/A, {{ user.username }}</a>
+                        {% else %}
+                            <a class="nav-link">BIENVENDO/A, Usuario no registrado</a>
+                        {% endif %} 
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="{% url 'welcome' %}">VER EL SITIO /</a>
+                <a class="nav-link" href="">VER EL SITIO</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{% url 'updateuser' user.pk %}">CAMBIAR CONTRASEÑA /</a>
+                <!--CAMBIAR CONTRASEÑA-->
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">TERMINAR SESIÓN</a>
