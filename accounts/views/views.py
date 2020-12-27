@@ -52,26 +52,22 @@ class UserList(ListView):
     #paginate_by=10
 
 #Crear usuario    
-class UserCreate(SuccessMessageMixin, CreateView):
-    model=User
-    form=RegisterUserForm
-    template_name='register.html'
-    fields=[
-            'username',
-            'password',
-        ]
+class UserCreate(CreateView):
+    model = User
+    form_class = RegisterUserForm
+    template_name = 'register.html'
 
-    def form_valid(self, form):
-        c = {'form': form, }
-        user = form.save(commit=False)
-        # Cleaned(normalized) data
-        password = form.cleaned_data['password']
-        print (password)
-        user.set_password(password)
-        user.save()
-        # Create User model
-        User.objects.create(user=user)
-        return super(UserCreate, self).form_valid(form)
+    # def form_valid(self, form):
+    #     c = {'form': form, }
+    #     user = form.save(commit=False)
+    #     # Cleaned(normalized) data
+    #     password = form.cleaned_data['password']
+    #     print (password)
+    #     user.set_password(password)
+    #     user.save()
+    #     # Create User model
+    #     User.objects.create(user=user)
+    #     return super(UserCreate, self).form_valid(form)
 
     def get_success_url(self):
         success_message='El Usuario fue creado corectamente'

@@ -5,8 +5,8 @@ from .models import Perfil
 
 #Formulario de Autenticación del Usuario
 class AuthenticationUserForm (AuthenticationForm):
-    first_name = forms.CharField(max_length=140, required=True)
-    last_name = forms.CharField(max_length=140, required=False)
+    first_name = forms.CharField(max_length=140, required=True, label='Nombres')
+    last_name = forms.CharField(max_length=140, required=False, label='Apellidos')
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -19,6 +19,7 @@ class AuthenticationUserForm (AuthenticationForm):
             'password1',
             'password2',
         )
+
         labels={
             'username': 'Nombre de Usuario',
             'email': 'Dirección de Correo',
@@ -30,9 +31,9 @@ class AuthenticationUserForm (AuthenticationForm):
 
 #Formulario para Registrar al Usuario
 class RegisterUserForm (UserCreationForm):
-    first_name = forms.CharField(max_length=140, required=True)
-    last_name = forms.CharField(max_length=140, required=False)
-    email = forms.EmailField(required=True)
+    first_name = forms.CharField(max_length=140, required=True, label='Nombres')
+    last_name = forms.CharField(max_length=140, required=False, label='Apellidos')
+    email = forms.EmailField(required=True, label='Correo Electrónico')
 
     class Meta:
         model = User

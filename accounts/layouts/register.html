@@ -1,5 +1,5 @@
-{% extends 'welcome.html' %} 
-{% block content %}           
+{% extends 'welcome.html' %}
+{% block content %}
 <!--NAVEGACION-->
 <div class="container">
     <nav aria-label="breadcrumb fixed-top">
@@ -21,7 +21,39 @@
               <h5 class="ml-3">Añadir Usuario</h5>
               <form class="form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                  {{ form.errors }}
                 <p class="ml-3">Primero introduzca un nombre de usuario y una contraseña. Luego podrá editar el resto de opciones del usuario.</p>
+
+                  <div class="container mt-5 d-flex d-inline">
+                      <div class="col-md-3">
+                          <label class="mr-3 font-weight-bold" for="">{{ form.first_name.label }}</label>
+                      </div>
+                      <div class="col-md-9">
+                          {{ form.first_name }}
+                      </div>
+                  </div>
+                  <hr>
+
+                  <div class="container mt-5 d-flex d-inline">
+                      <div class="col-md-3">
+                          <label class="mr-3 font-weight-bold" for="">{{ form.last_name.label }}</label>
+                      </div>
+                      <div class="col-md-9">
+                          {{ form.last_name }}
+                      </div>
+                  </div>
+                  <hr>
+
+                  <div class="container mt-5 d-flex d-inline">
+                      <div class="col-md-3">
+                          <label class="mr-3 font-weight-bold" for="">{{ form.email.label }}</label>
+                      </div>
+                      <div class="col-md-9">
+                          {{ form.email }}
+                      </div>
+                  </div>
+                  <hr>
+
 
                 <!--NOMBRE DE USUARIO-->
                 <div class="container mt-5 d-flex d-inline">
@@ -34,7 +66,7 @@
                         <!--NOMBRE DE USUARIO <input type="text" class="form-control d-inline w-50" id="nombre" name="nombre"  placeholder="Nombre">-->
                     <p class="text-muted textsize mt-2">Requerido. 150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</p>
                     </div>
-                </div> 
+                </div>
                 <hr>
 
                 <!--CONTRASEÑA-->
@@ -43,7 +75,7 @@
                         <label class="mr-3 font-weight-bold d-inline" for="">Contraseña:</label>
                     </div>
                     <div class="col-md-9">
-                        {{ form.password }}
+                        {{ form.password1 }}
                         <!--CONTRASEÑA <input type="password" class="form-control d-inline w-25" id="contrasena" name="contrasena" placeholder="Contraseña">-->
                         <p class="text-muted textsize mt-2">Su contraseña no puede asemejarse tanto a su otra información personal.</p>
                         <p class="text-muted textsize">Su contraseña debe contener al menos 8 caracteres.</p>
@@ -59,7 +91,7 @@
                         <label class="mr-3 font-weight-bold d-inline" for="">Contraseña (Confirmación):</label>
                     </div>
                   <div class="col-md-9">
-                    {{ form.password }}
+                    {{ form.password2 }}
                     <!--CONTRASEÑA (CONFIRMACIÓN) <input type="password" class="form-control d-inline w-25" id="contrasenaconfirmacion" name="contrasenaconfirmacion" placeholder="Contraseña">-->
                     <p class="text-muted textsize mt-2">Para verificar, introduzca la misma contraseña anterior.</p>
                   </div>
@@ -89,14 +121,14 @@
                         <div class="p-2">
                             <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">GRABAR</button>
                         </div>
-                    </form> 
-                </div> 
+                    </form>
+                </div>
                 </div>
                 <hr>
               </form>
           </div>
       </div>
   </div>
-  
+
 {% endblock content%}
 

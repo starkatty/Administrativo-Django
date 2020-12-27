@@ -25,7 +25,7 @@ SECRET_KEY = 'y=(y3ai$3%ax7!(z_@jv03$k1!#)gvirsq^7hj19jfjk-eh&b*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
 
 # Application definition
 
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'basepost',
         'USER': 'postgres',
-        'PASSWORD': 'Estrella.#20',
+        'PASSWORD': 'casa1234',
         'HOST': '127.0.0.1',
         'DATABASE_PORT': '5432',
     }
