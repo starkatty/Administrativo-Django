@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+#from django.conf.urls import url
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'basepost',
         'USER': 'postgres',
-        'PASSWORD': 'casa1234',
+        'PASSWORD': 'Estrella.#20',
         'HOST': '127.0.0.1',
         'DATABASE_PORT': '5432',
     }

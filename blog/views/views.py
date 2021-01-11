@@ -17,15 +17,15 @@ from django.http import HttpResponse
 
 #Lista de Posts
 class PostsList(ListView):
-    model=Post
-    template_name='posts.html'
+    model = Post
+    template_name = 'posts.html'
 
 #Crear Post  
-class PostCreate(SuccessMessageMixin, CreateView):
-    model=Post
-    form=PostForm
-    template_name='create-post.html'
-    fields="__all__"
+class PostCreate(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'create-post.html'
+    #fields = "__all__"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author_list'] = User.objects.all()
@@ -37,23 +37,36 @@ class PostCreate(SuccessMessageMixin, CreateView):
 
 #Detalle del Post
 class PostDetail(DetailView):
-    model=Post
-    template_name='post-detail.html'
+    model = Post
+    template_name = 'post-detail.html'
+    #fields = "__all__"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author_list'] = User.objects.all()
+        return context  
+    def get_success_url(self):
+        success_message='El Post fue creado corectamente'
+        messages.success(self.request, success_message)
+        return reverse_lazy('createpost') 
 
 #Modificar Post
 class PostUpdate(SuccessMessageMixin, UpdateView):
-    model=Post
-    form=PostForm
-    template_name='create-post.html'
-    fields="__all__"
+    model = Post
+    form_class = PostForm
+    template_name = 'create-post.html'
+    #fields = "__all__"
     success_message="El Post ha sido actualizado correctamente"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author_list'] = User.objects.all()
+        return context 
     def get_success_url(self):
         return reverse('listpost')
 
 #Eliminar Post
 class PostDelete(SuccessMessageMixin, DeleteView):
-    model=Post
-    template_name='confir_delete_post.html'
+    model = Post
+    template_name = 'confir_delete_post.html'
     def get_success_url(self):
         success_message='El Post fue eliminado correctamente'
         messages.success(self.request, (success_message))

@@ -28,10 +28,13 @@
             <div class="col-md-9">
                 <form class="bg-light" class="form" method="GET" action="{% url 'usersearch' %}">
                   {% csrf_token %}
+                  {{ form.errors }}
                   <div class="container d-flex align-items-left mt-3 w-50 ml-0">
                       <i class="fas fa-search mt-2 mr-2"></i>
                       <input name="usersearch" type="text" class="form-control mr-2" id="BuscarUsuario" placeholder="Nombre de Usuario">
                       <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Buscar</button>
+                      <label>{{ object_list.count }} resultados</label>
+                      <a href="{% url 'listuser' %}">( {{ count_user }} Total)</a>
                   </div> 
                 </form>
 

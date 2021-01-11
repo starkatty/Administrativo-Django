@@ -1,0 +1,2 @@
+ImproperlyConfigured at /accounts/user/detail/35
+Specifying both 'fields' and 'form_class' is not permitted.

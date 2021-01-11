@@ -21,12 +21,12 @@
       <div class="row">
           <div class="col-md-12">
               <h5 class="ml-3">{% block titule %} Añadir Post {% endblock titule %}</h5>
-              <form class="form" method="POST" action="{% url 'createpost' %}">
+              <form class="form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 
                 <!--AUTOR-->
                 <div class="container mt-5">
-                    <label class="mr-3 font-weight-bold" for="">Author:</label>
+                    <label class="mr-3 font-weight-bold" for="">{{ form.author.label }}</label>
                     <select class="mr-1" name="author" required>
                     <form class="form" method="POST" action="{% url 'listuser' %}">
                         {% if author_list %}
@@ -42,14 +42,14 @@
                 <hr>
                 <!--TITULO-->
                 <div class="container mt-3">
-                    <label class="mr-3 font-weight-bold" for="">Title:</label>
+                    <label class="mr-3 font-weight-bold" for="">{{ form.title.label }}</label>
                     {{ form.title }}
                     <!--<input type="text" class="form-control d-inline w-50" id="titulo" name="titulo" placeholder="titulo" value="{{ post.title }}">-->
                 </div> 
                 <hr>
                 <!--TEXTO-->
                 <div class="container mt-3">
-                    <label class="mr-3 font-weight-bold" for="">Text:</label>
+                    <label class="mr-3 font-weight-bold" for="">{{ form.text.label }}</label>
                     {{ form.text }}
                     <!--<textarea class="d-inline" name="texto" id="textopost" cols="100" rows="10">{{ post.text }}</textarea>-->
                 </div>
@@ -57,7 +57,7 @@
                 <!--FECHA DE CREACION-->
                 <div class="container mt-3 d-block d-inline">
                     <div class="row d-flex d-inline">
-                        <label class="mr-3 font-weight-bold" for="">Created date:</label>
+                        <label class="mr-3 font-weight-bold" for="">{{ form.created_date.label }}</label>
                         <p class="datetime">
                         Fecha: {{ form.created_date }}
                         <!--<input type="text" name="created_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> -->
@@ -69,7 +69,7 @@
                     </div> 
                     <div class="row d-flex d-inline">
                         <p class="datetime">
-                        Hora: {{ form.created_hour }}
+                        Hora: 
                         <!--<input type="text" name="created_hour_0" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">-->
                         <a class="mr-2" href="">Ahora</a>
                         <p class="mr-2">|</p>
@@ -81,7 +81,7 @@
                 <!--FECHA DE PUBLICACION-->
                 <div class="container mt-3 d-block d-inline">
                     <div class="row d-flex d-inline">
-                        <label class="mr-3 font-weight-bold" for="">Published date:</label>
+                        <label class="mr-3 font-weight-bold" for="">{{ form.published_date.label }}</label>
                         <p class="datetime">
                         Fecha: {{ form.published_date }}
                         <!--<input type="text" name="published_date_0" value="18/06/2020" class="vDateField" size="10" required id="id_created_date_0"> -->
@@ -93,7 +93,7 @@
                     </div> 
                     <div class="row d-flex d-inline">
                         <p class="datetime">
-                        Hora: {{ form.published_hour }}
+                        Hora: 
                         <!--<input type="text" name="published_hour_0" value="13:34:34" class="vTimeField mt-2" size="8" required id="id_created_date_1">-->
                         <a class="mr-2" href="">Ahora</a>
                         <p class="mr-2">|</p>
@@ -110,14 +110,14 @@
                             <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">ELIMINAR</button>
                         </div> 
                     </form>
-                    <form class="form" method="POST" action="{% url 'createpost' %}">
+                    <form class="form" method="POST" action="">
                         {% csrf_token %}
                         <!--Grabar el post y devolver a la misma página con los campos vacios para poder agrega otro post-->
                         <div class="p-2">
                             <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Grabar y añadir otro</button>
                         </div>
                     </form>
-                    <form class="form" method="POST" action="{% url 'createpost' %}">
+                    <form class="form" method="POST" action="">
                         {% csrf_token %}
                         <!--Grabar el post y devolver a la misma página con los datos del mismo post creado-->
                         <div class="p-2">

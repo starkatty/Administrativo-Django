@@ -22,6 +22,7 @@
               <h5 class="ml-3">Añadir Grupo</h5>
               <form class="form" method="POST" action="">
                 {% csrf_token %}
+                {{ form.errors }}
                 <!--NOMBRE-->
                 <div class="container mt-5">
                     <label class="mr-3 font-weight-bold" for="">Nombre:</label>
