@@ -15,17 +15,26 @@
 
 <!--GRUPOS-->
 <div class="container w-100 h-100">
-  <form class="form" method="POST" action="creategroup">
-    {% csrf_token %}
-    <div class="container d-flex">
+    <div class="container d-flex justify-content-between">
       <h5 for="">Escoja grupo a modificar</h5>
-      <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Grupo  <i class="fas fa-plus"></i></button>
+      <form class="form" method="POST" action="{% url 'creategroup' %}">
+        {% csrf_token %}
+        <button class="btn btn-primary btn-wd btn-sm ml-auto">Añadir Grupo <i class="fas fa-plus"></i></button>
+      </form>
     </div>
-    <div class="container d-flex align-items-left mt-3 w-50 ml-0">
-        <i class="fas fa-search mt-2 mr-2"></i>
-        <input type="text" class="form-control mr-2" id="BuscarGrupo" placeholder="Grupo">
-        <button class="btn btn-primary btn-wd btn-sm ml-auto">Buscar</button>
-    </div>  
+              <div class="container d-flex align-items-left mt-3 ml-0">
+                  <form class="bg-light" class="form" method="GET" action="{% url 'groupssearch' %}">
+                    {% csrf_token %}
+                    {{ form.errors }}
+                    <div class="container d-flex align-items-left mt-3 ml-0">
+                        <i class="fas fa-search mt-2 mr-2"></i>
+                        <input name="groupssearch" type="text" class="form-control mr-2" id="BuscarGrupo" placeholder="Nombre de Grupo">
+                        <button class="btn btn-primary btn-wd btn-sm ml-auto" type="submit">Buscar</button>
+                        <label>{{ object_list.count }} resultados</label>
+                        <a href="{% url 'listgroups' %}">( {{ count_group }} Total)</a>
+                    </div> 
+                  </form>
+              </div>  
   </form>
   <hr>
 
@@ -90,6 +99,7 @@
     </tbody>
     <tr></tr>
   </table>
+
 </div>
 </div>
                 <div class="container">
@@ -99,4 +109,5 @@
                 </div>   
 </div>
 </div>
+
 {% endblock %}

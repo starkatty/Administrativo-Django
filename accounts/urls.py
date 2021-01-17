@@ -33,9 +33,10 @@ urlpatterns = [
     path('user/usersearch', UserListSearch.as_view(template_name="users.html"), name='usersearch'),
 
     #Grupos
-    path('groups/', GroupsList.as_view(template_name="groups.html"), name='groups'),
+    path('groups/', GroupsList.as_view(template_name="groups.html"), name='listgroups'),
     path('groups/detail/<int:pk>', GroupUpdate.as_view(template_name="group-detail.html"), name='groupdetail'),
     path('groups/creategroup', GroupCreate.as_view(template_name="create-group.html"), name='creategroup'),
     path('groups/edit/<int:pk>', GroupPasswordUpdate.as_view(template_name="group-update-password.html"), name='groupupdatepassword'),
     path('groups/delete/<int:pk>', GroupDelete.as_view(template_name="group_confirm_delete.html"), name='groupdelete'),   
+    path('groups/groupssearch', GroupListSearch.as_view(template_name="groups.html"), name='groupssearch'),
 ]

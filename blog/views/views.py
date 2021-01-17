@@ -4,6 +4,7 @@ from blog.forms import PostForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView 
 from django.urls import reverse
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django import forms
@@ -25,15 +26,24 @@ class PostCreate(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'create-post.html'
-    #fields = "__all__"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author_list'] = User.objects.all()
         return context  
+
+    #def form_valid(self, form):
+        #author = form.cleaned_data['author']
+        #print(author)
+        #print (self.request.POST['author'])
+        #author=self.request.POST['author']
+        #form.instance.author = User.objects.get(username=author)
+        #return super().form_valid(form)
+
     def get_success_url(self):
         success_message='El Post fue creado corectamente'
         messages.success(self.request, success_message)
-        return reverse_lazy('createpost')  
+        return reverse_lazy('createpost') 
 
 #Detalle del Post
 class PostDetail(DetailView):

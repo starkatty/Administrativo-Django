@@ -86,11 +86,12 @@ class UserUpdate(UpdateView):
     model = User
     form_class = RegisterUserForm
     template_name = 'user-detail.html'
-    #fields = '__all__'
+
     def get_success_url(self):
         success_message="El Usuario ha sido actualizado correctamente"
         messages.success(self.request, success_message)
         return reverse_lazy('userdetail')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['group_list'] = Group.objects.all()
@@ -101,7 +102,7 @@ class PasswordUpdate(UpdateView):
     model = User
     form_class = RegisterUserForm
     template_name = 'accounts/update-password.html'
-    fields = "__all__"
+
     def get_success_url(self):
         success_message="El Password ha sido actualizado correctamente"
         messages.success(self.request, success_message)
@@ -111,6 +112,7 @@ class PasswordUpdate(UpdateView):
 class UserDelete(DeleteView):
     model = User
     template_name = 'accounts/user_confirm_delete.html'
+
     def get_success_url(self):
         success_message='El Usuario fue eliminado correctamente'
         messages.success(self.request, (success_message))
@@ -120,12 +122,13 @@ class UserDelete(DeleteView):
 class UserListSearch(ListView):
     model = User
     template_name = 'accounts/users.html'
-    #form_class = SearchUserForm
+
     #initial = {'username':' '}
     def get_queryset(self):
         #print (self.request.GET['usersearch'])
         name=self.request.GET['usersearch']
         return User.objects.filter(username=name)
+
     #def get(self, request, *args, **kwargs):
     #    #form=self.form_class(initial=self.initial)
     #    name=request.GET['usersearch']
@@ -144,8 +147,10 @@ class Staff (ListView):
     model = User
     template_name = 'accounts/users.html'
     context_object_name = 'staff_list'
+
     def get_queryset(self):
         return User.objects.filter(is_staff=True).order_by('username')
+
     def get_success_url(self):
         return reverse_lazy('staff')
 
@@ -154,8 +159,10 @@ class NoStaff (ListView):
     model = User
     template_name = 'accounts/users.html'
     context_object_name = 'nostaff_list'
+
     def get_queryset(self):
         return User.objects.filter(is_staff=False).order_by('username')
+
     def get_success_url(self):
         return reverse_lazy('nostaff')
 
@@ -164,8 +171,10 @@ class Superuser (ListView):
     model = User
     template_name = 'accounts/users.html'
     context_object_name = 'superuser_list'
+
     def get_queryset(self):
         return User.objects.filter(is_superuser=True).order_by('username')
+
     def get_success_url(self):
         return reverse_lazy('superuser')
 
@@ -174,8 +183,10 @@ class NoSuperuser (ListView):
     model = User
     template_name = 'accounts/users.html'
     context_object_name = 'nosuperuser_list'
+
     def get_queryset(self):
         return User.objects.filter(is_superuser=False).order_by('username')
+
     def get_success_url(self):
         return reverse_lazy('nosuperuser')
 
@@ -184,8 +195,10 @@ class Active (ListView):
     model = User
     template_name = 'accounts/users.html'
     context_object_name = 'active_list'
+
     def get_queryset(self):
         return User.objects.filter(is_active=True).order_by('username')
+
     def get_success_url(self):
         return reverse_lazy('active')
 
@@ -194,8 +207,10 @@ class NoActive (ListView):
     model = User
     template_name = 'accounts/users.html'
     context_object_name = 'noactive_list'
+
     def get_queryset(self):
         return User.objects.filter(is_active=False).order_by('username')
+
     def get_success_url(self):
         return reverse_lazy('noactive')
    
@@ -206,11 +221,31 @@ class GroupsList(ListView):
     template_name = 'groups.html'
     context_object_name = 'group_list'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total_group = Group.objects.all()
+        context['count_group'] = total_group.count
+        return context
+
+#Busqueda de un Grupo
+class GroupListSearch(ListView):
+    model = Group
+    template_name = 'accounts/groups.html'
+
+    def get_queryset(self):
+        print (self.request.GET['groupssearch'])
+        name_group=self.request.GET['groupssearch']
+        return User.objects.filter(groups=name_group)
+
+    def get_success_url(self):
+        return reverse_lazy('listgroup') 
+
 #Crear grupo
 class GroupCreate(CreateView):
     model = Group
     form_class = RegisterGroupForm
     template_name = 'create-group.html'
+
     def get_success_url(self):
         success_message='El Grupo fue creado corectamente'
         messages.success(self.request, success_message)
@@ -221,6 +256,7 @@ class GroupUpdate(UpdateView):
     model = Group
     form_class = RegisterGroupForm
     template_name = 'group-detail.html'
+
     def get_success_url(self):
         success_message="El Grupo ha sido actualizado correctamente"
         messages.success(self.request, success_message)
@@ -231,6 +267,7 @@ class GroupPasswordUpdate(UpdateView):
     model = Group
     form_class = RegisterGroupForm
     template_name = 'accounts/group-update-password.html'
+
     def get_success_url(self):
         success_message="El Password ha sido actualizado correctamente"
         messages.success(self.request, success_message)
@@ -240,6 +277,7 @@ class GroupPasswordUpdate(UpdateView):
 class GroupDelete(DeleteView):
     model = Group
     template_name = 'accounts/group_confirm_delete.html'
+
     def get_success_url(self):
         success_message='El Grupo fue eliminado correctamente'
         messages.success(self.request, (success_message))
@@ -250,6 +288,7 @@ class ModifidPassword(UpdateView):
     template_name = "blog/update-password.html"
     fields = "__all__"
     success_message="La contraseña ha sido actualizada correctamente"
+
     def get_success_url(self):
         return reverse_lazy('listpost')
 

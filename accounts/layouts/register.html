@@ -59,7 +59,7 @@
                 <div class="container mt-5 d-flex d-inline">
                     <div class="col-md-3">
                         <!--{{ form.username.label }}-->
-                        <label class="mr-3 font-weight-bold" for="">Nombre de usuario:</label>
+                        <label class="mr-3 font-weight-bold" for="">{{ form.username.label }}</label>
                     </div>
                     <div class="col-md-9">
                         {{ form.username }}
@@ -72,7 +72,7 @@
                 <!--CONTRASEÑA-->
                 <div class="container mt-3 d-flex d-inline">
                     <div class="col-md-3">
-                        <label class="mr-3 font-weight-bold d-inline" for="">Contraseña:</label>
+                        <label class="mr-3 font-weight-bold d-inline" for="">{{ form.password1.label }}</label>
                     </div>
                     <div class="col-md-9">
                         {{ form.password1 }}
@@ -88,12 +88,23 @@
                 <!--CONTRASEÑA (CONFIRMACIÓN)-->
                 <div class="container mt-3 d-flex d-inline">
                     <div class="col-md-3">
-                        <label class="mr-3 font-weight-bold d-inline" for="">Contraseña (Confirmación):</label>
+                        <label class="mr-3 font-weight-bold d-inline" for="">{{ form.password2.label }}</label>
                     </div>
                   <div class="col-md-9">
                     {{ form.password2 }}
                     <!--CONTRASEÑA (CONFIRMACIÓN) <input type="password" class="form-control d-inline w-25" id="contrasenaconfirmacion" name="contrasenaconfirmacion" placeholder="Contraseña">-->
                     <p class="text-muted textsize mt-2">Para verificar, introduzca la misma contraseña anterior.</p>
+                  </div>
+                </div>
+                <hr>
+
+                <!--FECHA DE ALTA-->
+                <div class="container mt-3 d-flex d-inline">
+                    <div class="col-md-3">
+                        <label class="mr-3 font-weight-bold d-inline" for="">{{ form.date_joined.label }}</label>
+                    </div>
+                  <div class="col-md-9">
+                    {{ form.date_joined }}
                   </div>
                 </div>
                 <hr>
